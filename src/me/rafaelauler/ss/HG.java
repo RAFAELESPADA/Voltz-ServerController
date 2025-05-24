@@ -11,7 +11,7 @@ import net.md_5.bungee.api.plugin.Command;
 public class HG extends Command {
 	public static boolean COPADESATIVADA;
   public HG() {
-    super("miniimpact", null, new String[] { "scrim" });
+    super("minivoltz", null, new String[] { "scrim" , "copa" , "campeonato"} );
   }
   
   

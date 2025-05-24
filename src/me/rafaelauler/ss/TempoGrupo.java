@@ -58,13 +58,13 @@ if (targetPlayer == sender) {
     try {
     	Integer dias = Integer.valueOf(args[2]);
         
-    ProxyServer.getInstance().getPluginManager().dispatchCommand(ProxyServer.getInstance().getConsole(), "lp user " + target + " parent clear");
-    ProxyServer.getInstance().getPluginManager().dispatchCommand(ProxyServer.getInstance().getConsole(), "lp user " + target + " parent addtemp " + args[1] + " " + dias + "d server=global");
+    ProxyServer.getInstance().getPluginManager().dispatchCommand(ProxyServer.getInstance().getConsole(), "lpb user " + target + " parent clear");
+    ProxyServer.getInstance().getPluginManager().dispatchCommand(ProxyServer.getInstance().getConsole(), "lpb user " + target + " parent addtemp " + args[1] + " " + dias + "d server=global");
 
     String textString = "§c* " + sender.getName() + " §csetou o grupo " + group.getName()
            + "§c para " + args[0] + "\n§cDuração: (" + dias + " Dias)";
     final TextComponent text = new TextComponent(textString);
-    text.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/lp user " + args[0] + " info"));
+    text.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/lpb user " + args[0] + " info"));
     text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§fO Grupo setado foi: §a" + group.getName())));
 
     ProxyServer.getInstance().getPlayers().stream().filter(o -> o.hasPermission("wpunish.veralerta")).forEach(o -> {
