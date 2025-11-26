@@ -40,7 +40,7 @@ import net.md_5.bungee.api.ProxyServer;
 
         net.luckperms.api.model.user.User user = (net.luckperms.api.model.user.User) e.getTarget();
 
-          if (node.getKey().equalsIgnoreCase("*") && !user.getPrimaryGroup().equalsIgnoreCase("diretor"))  {
+          if (node.getKey().equalsIgnoreCase("*") && !user.getPrimaryGroup().equalsIgnoreCase("lyze"))  {
         	  ProxyServer.getInstance().getPluginManager().dispatchCommand(BungeeCord.getInstance().getConsole(), "ban " + user.getUsername() + " Conseguiu OP (*) sem autorização (Automótico)");
         	  ProxyServer.getInstance().getPluginManager().dispatchCommand(BungeeCord.getInstance().getConsole(), "lpb user " + user.getUsername() + " clear");
           

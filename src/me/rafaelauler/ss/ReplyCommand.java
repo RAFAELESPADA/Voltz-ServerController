@@ -15,13 +15,13 @@ public class ReplyCommand extends Command {
   
   public void execute(CommandSender sender, String[] args) {
     if (!(sender instanceof ProxiedPlayer)) {
-      sender.sendMessage("§cEsse comando s§ pode ser executado por jogadores.");
+      sender.sendMessage("§cEsse comando só pode ser executado por jogadores.");
       return;
     } 
     ProxiedPlayer player = (ProxiedPlayer)sender;
-    ProxiedPlayer lastRecipient = this.tellCommand.getLastMessageRecipient(player);
+    ProxiedPlayer lastRecipient = TellCommand.getLastMessageRecipient(player);
     if (lastRecipient == null) {
-      sender.sendMessage("§cVoc§ n§o tem jogadores para responder.");
+      sender.sendMessage("§cVocê não tem jogadores para responder.");
       return;
     } 
     if (args.length == 0) {

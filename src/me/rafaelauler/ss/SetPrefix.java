@@ -32,7 +32,7 @@ public class SetPrefix implements CommandExecutor {
             return true;
         }
 if (!sender.hasPermission("cmd.group")) {
-	sender.sendMessage(ChatColor.RED + "SEM AUTORIZA§§O!");
+	sender.sendMessage(ChatColor.RED + "SEM AUTORIZAÇÃO!");
 	return true;
 }
         String playerName = args[0];

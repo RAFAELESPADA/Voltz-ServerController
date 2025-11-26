@@ -1,5 +1,5 @@
-name: Impact-ServerController
-author: Ebenezer7
+name: BWPlugin
+author: Rafael Auler
 main: me.rafaelauler.ss.BukkitMain
 version: 1.0
 loadbefore: [KPCore]
@@ -8,8 +8,7 @@ softdepend: [AuraSkills, yPlugins]
 commands:
   set-prefix:
   pickencantar:
-  report:
-  adquirirvip:
+  creport:
   modo:
   sudo:
   consolesudo:
@@ -18,7 +17,11 @@ commands:
   dano:
   grupo:
   tempogrupo:
-  tag:
+  jogarbw:
+  lobby:
+  gorankup:
+  perfil:
+  
   
   
   

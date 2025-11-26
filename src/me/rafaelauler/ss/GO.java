@@ -14,14 +14,14 @@ public class GO extends Command {
   
   
   public void execute(CommandSender commandSender, String[] args) {
-	if (!commandSender.hasPermission("staffchat.use")) {
+	if (!commandSender.hasPermission("stormplugins.lobby.staffchat")) {
 		commandSender.sendMessage("§cVocê não tem permissão.");
 		return;
 	}
   
   if (args.length == 0) {
 		commandSender.sendMessage("§cUse /server <Server>.");
-		commandSender.sendMessage("§eServers: kitpvp , rankup, bedwars, evento");
+		commandSender.sendMessage("§eServers: kitpvp , rankup, bedwars, skywars, rankup, partygames");
 		return;
   }
   if (args.length >= 1) {

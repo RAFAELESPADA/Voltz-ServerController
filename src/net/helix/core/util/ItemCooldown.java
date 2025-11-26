@@ -1,9 +1,10 @@
 package net.helix.core.util;
 
 
+import org.bukkit.inventory.ItemStack;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.inventory.ItemStack;
 
 public class ItemCooldown extends HelixCooldownAPI {
 
@@ -15,7 +16,7 @@ public class ItemCooldown extends HelixCooldownAPI {
     private boolean selected;
 
     public ItemCooldown(ItemStack item, String name, Long duration) {
-        super(name, duration);
+        super();
         this.item = item;
     }
 }

@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
 public class CooldownFinishEvent extends CooldownEvent {
 
     public CooldownFinishEvent(Player player, HelixCooldownAPI cooldown) {
-        super(player, cooldown);
+        super();
     }
 
     private static final HandlerList handlers = new HandlerList();

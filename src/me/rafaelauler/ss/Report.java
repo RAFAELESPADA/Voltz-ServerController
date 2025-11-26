@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,7 +24,7 @@ public class Report
     if (!(sender instanceof Player)) {
       return true;
     }
-    if (cmd.getName().equalsIgnoreCase("report"))
+    if (cmd.getName().equalsIgnoreCase("creport"))
     {
       final Player p = (Player)sender;
       if (args.length <= 1)
@@ -38,17 +37,7 @@ public class Report
         p.sendMessage("§cAguarde para poder reportar novamente.");
         return true;
       }
-      delay.add(p.getName());
 
-/* 280 */       new BukkitRunnable()
-/*     */       {
-/*     */         public void run()
-/*     */         {
-	delay.remove(p.getName());
-/*     */   
-	  p.sendMessage("§cSeu Cooldown de Reportar acabou.");        
-/*     */         }
-/* 280 */       }.runTaskLater(BukkitMain.plugin, 240L);
 /*     */     
       String reportado = args[0];
       if (p.getName().equalsIgnoreCase(reportado)) {
@@ -71,14 +60,25 @@ public class Report
       p.sendMessage("\n §aJogador foi reportado com sucesso!");
       p.sendMessage("§a§l* §7O uso indevido ou exagerado do /report pode resultar em punição! \n ");
       for (Player all : Bukkit.getOnlinePlayers()) {
-        if (all.hasPermission("kombo.cmd.report")) {
+        if (all.hasPermission("stormplugins.lobby.staffchat")) {
         	if (toggle.containsKey(all.getName()))
         		return true;
         {
           all.sendMessage(" \n §a========§e§lREPORT§a========== \n  §eReporter: §7" + p.getName() + " \n  §eJogador reportado: §7" + reportado + " \n  §eMotivo:§7 " + motivo + " \n §a========§e§lREPORT§a========== \n ");
-          all.playSound(all.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
         }
         }
+
+        delay.add(p.getName());
+
+/* 280 */       new BukkitRunnable()
+/*     */       {
+/*     */         public void run()
+/*     */         {
+	delay.remove(p.getName());
+/*     */   
+	  p.sendMessage("§cSeu Cooldown de Reportar acabou.");        
+/*     */         }
+/* 280 */       }.runTaskLater(BukkitMain.plugin, 240L);
       }
     
     

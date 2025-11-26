@@ -9,8 +9,10 @@ import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.AbstractReconnectHandler;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.event.ServerKickEvent;
 import net.md_5.bungee.api.event.TabCompleteEvent;
@@ -29,6 +31,34 @@ public class PlayerListener implements Listener {
     if (args.length >= 1)
       if (args[0].startsWith("/"))
         if (args[0].startsWith("/btp") && e
+          .getCursor().contains(" ")) {
+          e.getSuggestions().clear();
+          ProxiedPlayer p = (ProxiedPlayer)e.getSender();
+          if (args.length == 1) {
+            for (ProxiedPlayer all : ProxyServer.getInstance().getPlayers())
+              e.getSuggestions().add(all.getName()); 
+            return;
+          } 
+          if (args.length == 2 && getSpace(e.getCursor()) == 1) {
+            addSuggestions(e, args);
+            return;
+          } 
+          if (args.length == 2) {
+            for (ProxiedPlayer all : ProxyServer.getInstance().getPlayers())
+              e.getSuggestions().add(all.getName()); 
+            return;
+          } 
+          if (args.length == 3 && getSpace(e.getCursor()) == 2)
+            addSuggestions(e, args); 
+        }   
+  }
+
+  @EventHandler(priority = 32)
+  public void onTtab(TabCompleteEvent e) {
+    String[] args = e.getCursor().toLowerCase().split(" ");
+    if (args.length >= 1)
+      if (args[0].startsWith("/"))
+        if (args[0].startsWith("/tell") && e
           .getCursor().contains(" ")) {
           e.getSuggestions().clear();
           ProxiedPlayer p = (ProxiedPlayer)e.getSender();
@@ -69,6 +99,17 @@ public class PlayerListener implements Listener {
     return space;
   }
 
+  @EventHandler
+  public void onServerKickEvent(PlayerDisconnectEvent ev) {
+   if (TellCommand.lastMessageMap.containsKey(TellCommand.getLastMessageRecipient(ev.getPlayer()))) {
+	   TellCommand.lastMessageMap.remove(TellCommand.getLastMessageRecipient(ev.getPlayer()));
+	   ProxyServer.getInstance().getConsole().sendMessage(TextComponent.fromLegacyText(("Removendo Variavel de tell do " + TellCommand.getLastMessageRecipient(ev.getPlayer()).getName())));
+   }
+   if (TellCommand.lastMessageMap.containsKey(ev.getPlayer())) {
+	   TellCommand.lastMessageMap.remove(ev.getPlayer());
+	   ProxyServer.getInstance().getConsole().sendMessage(TextComponent.fromLegacyText(("Removendo Variavel de tell do " + ev.getPlayer().getName())));
+   }
+  }
     
   @EventHandler
   public void onServerKickEvent(ServerKickEvent ev) {

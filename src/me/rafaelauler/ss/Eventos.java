@@ -6,21 +6,26 @@ package me.rafaelauler.ss;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
+import br.com.ystoreplugins.product.yarmazem.ArmazemAPIHolder;
+import br.com.ystoreplugins.product.yspawnersv2.SpawnerV2APIHolder;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.node.NodeAddEvent;
@@ -44,9 +49,24 @@ import net.milkbowl.vault.permission.Permission;
 	        EventBus eventBus = this.luckPerms.getEventBus();
 	        eventBus.subscribe(this.plugin, NodeAddEvent.class, this::onNodeAdd);
 	    }
+	    
+	    public void Atirar2(Player p) {
+	    	final Location loc = p.getEyeLocation();
 
+	        final Vector sponge = p.getLocation().getDirection().multiply(3.8).setY(0.45);
+	    	Block block = p.getLocation().getBlock().getRelative(0, -1, 0);
+	    	if (block.getType() == Material.SLIME_BLOCK && p.getWorld() == Bukkit.getWorld("spawn")) {
+	    		p.setVelocity(sponge);
+	    	    p.playEffect(loc, Effect.MOBSPAWNER_FLAMES, (Object)null);
+	    	}
+	    	}
 
+	    @EventHandler
+		public void onJoivn(PlayerMoveEvent e) {
 	    /*     */   
+	    
+	Atirar2(e.getPlayer());
+	}
 	    @EventHandler
 		public void onJoin(PlayerLoginEvent e) {
 			Player player = e.getPlayer();
@@ -79,7 +99,7 @@ import net.milkbowl.vault.permission.Permission;
 			Player player = e.getEntity().getKiller();
 			if (player.getWorld().equals(Bukkit.getWorld("plots"))) {
 			if (BukkitMain.getEspadasAPI().isFarmSword(player.getItemInHand())) {
-				econ.depositPlayer(player, 2 * BukkitMain.getEspadasAPI().getLootingLevel(player.getItemInHand()));	
+				econ.depositPlayer(player, 7 * BukkitMain.getEspadasAPI().getLootingLevel(player.getItemInHand()));	
 				player.sendMessage(ChatColor.RED + "Você ganhou dinheiro extra por matar esse mob com espada de farm");
 			}
 			}
@@ -92,7 +112,7 @@ import net.milkbowl.vault.permission.Permission;
 	    	
 	    	return;
 	    	}
-	    	if (!(e.getPlayer().getWorld().equals(Bukkit.getWorld("mina")))) {	
+	    	if (!(e.getPlayer().getWorld().equals(Bukkit.getWorld("mina")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina1")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina2")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina3")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina4")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minavip")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minapvp")))) {	
 	    		return;
 	    		}
 	    /*  46 */         Random rand = new Random();
@@ -125,7 +145,24 @@ import net.milkbowl.vault.permission.Permission;
 	    	e.getPlayer().sendMessage(ChatColor.YELLOW + "Você recebeu uma bomba larga");
 	    	}
 	    	}
-
+	    public static ArmazemAPIHolder getArmazemAPI() {
+	    	  try {
+	    	      RegisteredServiceProvider<ArmazemAPIHolder> rsp = Bukkit.getServer().getServicesManager()
+	    	          .getRegistration(ArmazemAPIHolder.class);
+	    	      return rsp == null ? null : rsp.getProvider();
+	    	  } catch (Throwable var1) {
+	    	      return null;
+	    	  }
+	    	}
+	    public static SpawnerV2APIHolder getSPAPI() {
+	    	  try {
+	    	      RegisteredServiceProvider<SpawnerV2APIHolder> rsp = Bukkit.getServer().getServicesManager()
+	    	          .getRegistration(SpawnerV2APIHolder.class);
+	    	      return rsp == null ? null : rsp.getProvider();
+	    	  } catch (Throwable var1) {
+	    	      return null;
+	    	  }
+	    	}
 	    @EventHandler
 		public void otnShot(EntityDamageByEntityEvent e) {
 			
@@ -134,9 +171,8 @@ import net.milkbowl.vault.permission.Permission;
 					
 					Player damagedPlayer = (Player) e.getEntity();
 					Arrow arrow = (Arrow) e.getDamager();
-					
 					if (arrow.getShooter() != null && arrow.getShooter() instanceof Player) {
-						
+
 						Player shooter = (Player) arrow.getShooter();
 						
 						// ARROW HEALTH MESSAGE
@@ -164,22 +200,8 @@ import net.milkbowl.vault.permission.Permission;
 				}
 			}
 	    
-	    @EventHandler
-	    public void event(org.bukkit.event.player.PlayerInteractEvent e) {
-	        Player p = e.getPlayer();
-	        if (!Bukkit.getServer().getName().equals("Prison")) {
-	        	return;
-	        }
-	        if(!p.isSneaking()) return;
-	        if(e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-	        ItemStack item = p.getInventory().getItemInMainHand();
-	        if(item == null) return;
-	        Material t = item.getType(); // type of item
-	        if(t == Material.DIAMOND_PICKAXE || t == Material.IRON_PICKAXE) {
-	        p.performCommand("dm open upgrades");
 
-	        }
-	    }
+	    
 
 
 	    
@@ -197,14 +219,8 @@ import net.milkbowl.vault.permission.Permission;
         }
 
         net.luckperms.api.model.user.User user = (net.luckperms.api.model.user.User) e.getTarget();
-        for (Player player : Bukkit.getOnlinePlayers())
-        	if (player.hasPermission("utils.staffchat.use")) {
-
-        	      String msg = "§b§lAVISO §f" + user.getUsername() + " recebeu a permissão §e" + node.getKey();
-          player.sendMessage(msg); 
-        	}
-          if (node.getKey() == "*" && !user.getPrimaryGroup().equalsIgnoreCase("diretor"))  {
+        
+          if (node.getKey() == "*")  {
         	  Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + user.getUsername() + " Conseguiu OP (*) sem autorização (Automatico)");
-          }
-    }
+          }}
     }

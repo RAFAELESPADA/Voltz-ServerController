@@ -21,7 +21,7 @@ import net.md_5.bungee.api.plugin.Command;
 	        return player.hasPermission("group." + group);
 	    }
 	  public void execute(CommandSender sender, String[] args) {
-	    if (!sender.hasPermission("tag.diretor")) {
+	    if (!sender.hasPermission("*")) {
 	      sender.sendMessage(ChatColor.RED + "Você precisa ser Diretor ou superior para executar esse comando.");
 	      return;
 	    } 
@@ -31,7 +31,7 @@ import net.md_5.bungee.api.plugin.Command;
 	    } 
 	    try {
 	    if (args[0].equalsIgnoreCase("confirmar")) {
-	    	PermissionNode node = PermissionNode.builder("utils.staffchat.use").build();
+	    	PermissionNode node = PermissionNode.builder("stormplugins.lobby.staffchat").build();
 	    api.getUserManager().getLoadedUsers().forEach(u -> { if (u.getUsername() != sender.getName() && (u.getNodes().contains(node))) {
 	    api.getUserManager().deletePlayerData(u.getUniqueId());	
 	    sender.sendMessage(ChatColor.RED + "Todos da equipe foram demotados! Exceto você!");

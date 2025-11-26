@@ -21,9 +21,9 @@ public class Aviso extends Command {
         sender.sendMessage("§cUso incorreto. Use /alerta <mensagem>.");
         return;
       } 
-      String msg = "§b§lAVISO §f" + String.join(" ", (CharSequence[])args);
+      String msg = "§b§lSKYZER §f" + String.join(" ", (CharSequence[])args);
       for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers())
-        player.sendMessage(TextComponent.fromLegacyText(msg)); 
+        player.sendMessage(TextComponent.fromLegacyText(msg.replace("&", "§"))); 
     } else {
       p.sendMessage("§cVocê não tem autorização para isso.");
     } 

@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.group.Group;
@@ -25,7 +27,7 @@ import net.md_5.bungee.api.plugin.Command;
 	  
 	  @SuppressWarnings("deprecation")
 	public void execute(CommandSender sender, String[] args) {
-	    if (!sender.hasPermission("cmd.group")) {
+	    if (!sender.hasPermission("stormplugins.bedwars.manutencao")) {
 	      sender.sendMessage(ChatColor.RED + "Você precisa ser Administrador ou superior para executar esse comando.");
 	      return;
 	    } 
@@ -41,7 +43,7 @@ import net.md_5.bungee.api.plugin.Command;
 
         // Group doesn't exist?
         if (group == null) {
-            sender.sendMessage(ChatColor.RED + "Grupo " + groupName +  " n§o existe!");
+            sender.sendMessage(ChatColor.RED + "Grupo " + groupName +  " não existe!");
             return;
         }
 
@@ -58,6 +60,8 @@ import net.md_5.bungee.api.plugin.Command;
             sender.sendMessage(ChatColor.RED + group.getName() + " tem " + memberUniqueIds.size() + " membros.");
             sender.sendMessage(ChatColor.YELLOW +" UUID DOS PLAYERS ABAIXO:");
             sender.sendMessage(ChatColor.RED + memberUniqueIds.toString());
+            sender.sendMessage(ChatColor.YELLOW +" NICK PLAYERS ABAIXO:");
+            sender.sendMessage(ChatColor.RED + Bukkit.getPlayer(memberUniqueIds.toString()).getName());
         });
 	  }
 	}

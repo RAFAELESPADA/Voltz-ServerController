@@ -23,7 +23,7 @@ public class Manutencao implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 if (!sender.hasPermission("cmd.manutencao")) {
-	sender.sendMessage(ChatColor.RED + "SEM AUTORIZA§§O!");
+	sender.sendMessage(ChatColor.RED + "SEM AUTORIZAÇÃO!");
 	return true;
 }
 if (!istoggled) {
@@ -34,7 +34,7 @@ if (!istoggled) {
 	  istoggled = false;
       sender.sendMessage("SERVIDOR ESTÁ AGORA EM MANUTENÇÃO");  
       for (Player p2 : Bukkit.getOnlinePlayers()) {
-    	  if (!p2.hasPermission("manutencao.bypass")) {
+    	  if (!p2.hasPermission("stormplugins.lobby.staffchat")) {
     		  p2.kickPlayer(ChatColor.RED + "Esse servidor está agora em manutenção.");
     	  }
       }

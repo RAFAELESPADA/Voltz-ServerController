@@ -55,7 +55,7 @@ public class ReportCMD extends Command {
         sender.sendMessage("§cVocê reportou " + targetPlayer.getName() + " por " + reason);
 
         Title t = ProxyServer.getInstance().createTitle();
-        ProxyServer.getInstance().getPlayers().stream().filter(online -> online.hasPermission("staffchat.use"))
+        ProxyServer.getInstance().getPlayers().stream().filter(online -> online.hasPermission("stormplugins.lobby.staffchat"))
 
                 .forEach(online -> {
                     online.sendMessage((BaseComponent)new TextComponent(""));
@@ -74,6 +74,6 @@ public class ReportCMD extends Command {
 
 
 private static boolean impossibleToBan(String nickName) {
-    return Stream.of("Rafael_Auler", "Ritual123", "Ebenezer7").anyMatch(s -> s.equalsIgnoreCase(nickName));
+    return Stream.of("Rafael_Auler", "SamuelVinicius", "Leticia_Neeh", "Ritual123", "Ebenezer7", "yRenegado_Br").anyMatch(s -> s.equalsIgnoreCase(nickName));
 }
 }

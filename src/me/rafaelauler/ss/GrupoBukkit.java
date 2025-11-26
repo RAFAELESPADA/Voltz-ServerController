@@ -56,7 +56,7 @@ public boolean onCommand(org.bukkit.command.CommandSender sender, org.bukkit.com
       }
       Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + target + " parent clear");
       Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + target + " parent set " + args[1]);
-
+      
       String textString = "§c* " + sender.getName() + " §csetou o grupo " + group.getName()
              + "§c para " + args[0] + "\n§cDuração: (Permanente)";
       Bukkit.broadcast(textString, "wpunish.veralerta");

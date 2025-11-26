@@ -33,7 +33,7 @@ public final class Modo
   {
     Player p = (Player)sender;
     if (cmd.getName().equalsIgnoreCase("modo")) {
-      if (!p.hasPermission("utils.staffchat.use")) {
+      if (!p.hasPermission("stormplugins.lobby.staffchat")) {
     	  p.sendMessage(ChatColor.RED + "Você não é staff!");
     	  return true;
       }

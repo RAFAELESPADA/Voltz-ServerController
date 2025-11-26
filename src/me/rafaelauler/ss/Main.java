@@ -77,7 +77,7 @@ instance = this;
 
 		  public void acMandarMsg(ProxiedPlayer p, String message) {
 			    for (ProxiedPlayer player : getProxy().getPlayers()) {
-			      if (!player.hasPermission("tag.gerente") || 
+			      if (!player.hasPermission("tag.admin") || 
 			        player == null)
 			        continue; 
 			      player.sendMessage((BaseComponent)new TextComponent("§3[AdminChat] §7" + p.getName() + "§d: §f" +  message));
@@ -89,10 +89,10 @@ instance = this;
 		  @EventHandler
 		  public void onChaat(ChatEvent e) {
 		    ProxiedPlayer p = (ProxiedPlayer)e.getSender();
-		    if (AdminChat.sc.contains(p.getName().toLowerCase()) && p.hasPermission("tag.gerente") && 
+		    if (AdminChat.sc.contains(p.getName().toLowerCase()) && p.hasPermission("tag.admin") && 
 		      !e.getMessage().startsWith("/")) {
 		      for (ProxiedPlayer player : getProxy().getPlayers()) {
-		        if (!player.hasPermission("tag.gerente") || 
+		        if (!player.hasPermission("tag.admin") || 
 		          player == null)
 		          continue; 
 		        player.sendMessage((BaseComponent)new TextComponent("§3[AdminChat] §7" + p.getName() + "§d: §f" +  e.getMessage()));
@@ -167,17 +167,20 @@ instance = this;
 	    	 pluginManager.registerCommand(this, new BSudo());
 	    	 pluginManager.registerCommand(this, new BTP());
 	    	 pluginManager.registerCommand(this, new PingCommand());
-	    	 pluginManager.registerCommand(this, new LobbyClass());
 	    	 pluginManager.registerCommand(this, new ListarUsuarios());
 	    	 pluginManager.registerCommand(this, new TAviso());
-	    	 pluginManager.registerCommand(this, new ReportCMD());
-	    	 pluginManager.registerCommand(this, new Grupo());
 	    	 pluginManager.registerCommand(this, new ToggleFake());
 	    	 pluginManager.registerCommand(this, new StaffList(this));
 	    	 pluginManager.registerCommand(this, new DemoteAllStaff());
+	    	 pluginManager.registerCommand(this, new ReportCMD());
 	    	 pluginManager.registerCommand(this, new AdminChat(this));
 	    	 pluginManager.registerCommand(this, new StaffChat(this));
+
+	    	 pluginManager.registerCommand(this, new TellCommand());
+	    	 TellCommand tell = new TellCommand();
+	    	 pluginManager.registerCommand(this, new ReplyCommand(tell));
 	    	 pluginManager.registerCommand(this, new HG());
+	    	 pluginManager.registerCommand(this, new BroadCast());
 	    	 pluginManager.registerCommand(this, new OpenHG());
 	    	 getLogger().info("IP da Host: " + getIpLocalHost());
 	    }

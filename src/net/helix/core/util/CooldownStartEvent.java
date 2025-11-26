@@ -11,7 +11,7 @@ import org.bukkit.event.HandlerList;
 public class CooldownStartEvent extends CooldownEvent implements Cancellable {
 
     public CooldownStartEvent(Player player, HelixCooldownAPI cooldown) {
-        super(player, cooldown);
+        super();
     }
 
     private boolean cancelled;

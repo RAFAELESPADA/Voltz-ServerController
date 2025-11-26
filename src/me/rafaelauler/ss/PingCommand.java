@@ -20,7 +20,7 @@ public class PingCommand extends Command {
       String targetPlayerName = args[0];
       ProxiedPlayer targetPlayer = ProxyServer.getInstance().getPlayer(targetPlayerName);
       if (targetPlayer == null) {
-        sender.sendMessage("§cN§o achei esse jogador.");
+        sender.sendMessage("§cNão achei esse jogador.");
         return;
       } 
       int ping = targetPlayer.getPing();

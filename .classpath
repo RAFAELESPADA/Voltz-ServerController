@@ -11,16 +11,16 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/NOVO SURVIVAL SOLGLEEMS 1.21/plugins/UltimateShop-3.4.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/NOVO SURVIVAL SOLGLEEMS 1.21/plugins/LeafTags.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/NOVO SURVIVAL SOLGLEEMS 1.21/plugins/PlayerPoints-3.3.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/lombok.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/spigot-api-1.21.4-R0.1-20250314.100259-55.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/AuraSkills-2.2.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/BungeeCord.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/EVENTOS/plugins/yPoints-2.3.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/TAB v5.2.0 (1).jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/LuckPerms-Bukkit-5.4.164.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/Asteroid-1.1.6-release-1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/VOLTZMC/PVP-KP/plugins/yPlugins.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/VOLTZMC/PVP-KP/plugins/Vault.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/VOLTZMC/PVP-KP/plugins/KP-CORE-v4.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/spigot-1.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/LuckPerms-Bukkit-5.5.18.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SPRINTMC BACKUP/BUNGEE/server.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/lombok.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/PAPIProxyBridge-Bukkit-1.8.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/KP-PVP-v1.8-1.12.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/ItemJoin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
