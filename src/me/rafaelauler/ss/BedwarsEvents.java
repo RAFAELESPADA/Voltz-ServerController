@@ -55,27 +55,29 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	        }
 	        }
 		protected boolean aa(@NotNull SlashCommandInteractionEvent arg0 , String nick) {
+			 try {
+			 if (WaveBukkit.getPlayerManager().getPlayer(nick) == null) {
+				   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.");
+				   return true;
+			   }
 		   WavePlayer p = WaveBukkit.getPlayerManager().getPlayer(nick);
-		   if (p == null) {
-			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.");
-			   return true;
-		   }
+		  
 	       RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
 			if (provider != null) {
 	OfflinePlayer real = Bukkit.getOfflinePlayer(nick);
 			    LuckPerms api = provider.getProvider();
 				
-		   try {
+		  
 
 		   arg0.reply("**INFORMAÇÕES DE ESTATÍSTICAS DO JOGADOR **" + p.getName() + "\nKills ( KITPVP ): " + p.getPvp().getKills() + "\nMortes: " + p.getPvp().getDeaths() + "\nKillStreak atual ( KITPVP ): " + p.getPvp().getKillstreak() + "\nKills na FPS ( KITPVP ): " + p.getPvp().getKillsfps() + "\nWins ( Sumô ): " + p.getPvp().getWinssumo() + "\nWins no duelos (1v1): " + p.getPvp().getWinsx1() + "\nXP: " + p.getPvp().getXp() + "\nCoins: " + p.getPvp().getCoins() + "\nMortes no 1v1: " + p.getPvp().getDeathsx1() + "\nWinStreak no 1v1: " + p.getPvp().getWinstreakx1() + "\nCargo: " + giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() + "\nKills ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerKills(p.getUuid()) + "\nMortes ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerDeaths(p.getUuid()) + "\nWins ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerWins(p.getUuid()) + "\nCamas Destrúidas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerBedsDestroyed(p.getUuid()) + "\nPerdas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerLoses(p.getUuid()) + "\nPartidas Jogadas (BedWars): " + bedwarsAPI.getStatsUtil().getPlayerGamesPlayed(p.getUuid())).queue();
 		   return true; 
 		   }
-		   catch (Exception e) {
-			   arg0.reply("Um erro ocorreu").setEphemeral(true).queue();
-			   e.printStackTrace();
+			 }
+		   catch (NullPointerException e) {
+			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.");
 			   }
 		
-	}
+	
 			return false;
 		}
 		public User giveMeADamnUser(UUID uniqueId) {
