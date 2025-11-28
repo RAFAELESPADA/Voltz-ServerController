@@ -3,6 +3,7 @@ package me.rafaelauler.ss;
 
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -26,6 +27,13 @@ import org.bukkit.util.EulerAngle;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.JDA;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.JDABuilder;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.interactions.commands.OptionType;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.interactions.commands.build.Commands;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.requests.GatewayIntent;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import br.com.ystoreplugins.product.yespadasfarm.EspadasFarmAPIHolder;
 import br.com.ystoreplugins.product.yrankup.RankupAPIHolder;
 import br.com.ystoreplugins.product.ytempoonline.TempoAPIHolder;
@@ -45,7 +53,7 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-
+    public final String TOKEN = "MTM4NjAwMzE5MjU0NTgwNDM2OA.Gyo8m4.0ljKzxbywfqW4L6A9tpchqZW4GQhFjdl8qFVYQ";
     private int rotate = 0, dropID = 0;
 
     public String ifNullEmpty(String check) {
@@ -57,6 +65,16 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     public void onEnable() {
     	  plugin = this;
 registerEvents();
+JDA jda = JDABuilder.createLight(TOKEN, EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)).addEventListeners(new BedwarsEvents(this, this.luckPerms))
+.build();
+CommandListUpdateAction commands = jda.updateCommands();
+
+commands.addCommands(
+		  Commands.slash("status", "Veja status de kitpvp de um jogador")
+              .addOption(OptionType.STRING, "nick", "Nick do jogador", true) // you can add required options like this too
+               
+    .setDefaultPermissions(DefaultMemberPermissions.ENABLED)) // only admins should be able to use this command.
+;
 if (MCVersion.get().isInferior(MCVersion.v1_13)) {
     channel2 = "bungee:teleport"; 
 }
