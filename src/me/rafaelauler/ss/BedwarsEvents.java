@@ -44,7 +44,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	        switch (arg0.getName())
 	        {
 	        
-	        case "status":
+	        case "perfil":
 	          	 try {
 	               aa(arg0, arg0.getOption("nick").getAsString()); // content is required so no null-check here
 	               break;
