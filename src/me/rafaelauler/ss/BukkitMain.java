@@ -70,7 +70,7 @@ JDA jda = JDABuilder.createLight(TOKEN, EnumSet.of(GatewayIntent.GUILD_MESSAGES,
 CommandListUpdateAction commands = jda.updateCommands();
 
 commands.addCommands(
-		  Commands.slash("status", "Veja status de kitpvp de um jogador")
+		  Commands.slash("perfil", "Veja status de kitpvp e bedwars de um jogador")
               .addOption(OptionType.STRING, "nick", "Nick do jogador", true) // you can add required options like this too
                
     .setDefaultPermissions(DefaultMemberPermissions.ENABLED)) // only admins should be able to use this command.
