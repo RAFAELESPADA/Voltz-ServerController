@@ -75,6 +75,8 @@ commands.addCommands(
                
     .setDefaultPermissions(DefaultMemberPermissions.ENABLED)) // only admins should be able to use this command.
 ;
+		// Then finally send your commands to discord using the API
+		  commands.queue();
 if (MCVersion.get().isInferior(MCVersion.v1_13)) {
     channel2 = "bungee:teleport"; 
 }
