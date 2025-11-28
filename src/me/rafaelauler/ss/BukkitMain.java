@@ -53,7 +53,7 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-    public final String TOKEN = "MTM4NjAwMzE5MjU0NTgwNDM2OA.Gyo8m4.0ljKzxbywfqW4L6A9tpchqZW4GQhFjdl8qFVYQ";
+    public final String TOKEN = "NULL";
     private int rotate = 0, dropID = 0;
 
     public String ifNullEmpty(String check) {
