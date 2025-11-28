@@ -58,6 +58,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 		   WavePlayer p = WaveBukkit.getPlayerManager().getPlayer(nick);
 		   if (p == null) {
 			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.");
+			   return true;
 		   }
 	       RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
 			if (provider != null) {
