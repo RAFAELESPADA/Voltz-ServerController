@@ -57,7 +57,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	    }
 	        }
 		protected boolean aa(@NotNull SlashCommandInteractionEvent arg0 , String nick) {
-		   WavePlayer p = WaveBukkit.getInstance().getPlayerManager().getPlayer(nick);
+		   WavePlayer p = WaveBukkit.getPlayerManager().getPlayer(nick);
 	       RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
 			if (provider != null) {
 	OfflinePlayer real = Bukkit.getOfflinePlayer(nick);
