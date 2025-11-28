@@ -57,7 +57,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 		protected boolean aa(@NotNull SlashCommandInteractionEvent arg0 , String nick) {
 			 try {
 			 if (WaveBukkit.getPlayerManager().getPlayer(nick) == null) {
-				   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.");
+				   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.").queue();
 				   return true;
 			   }
 		   WavePlayer p = WaveBukkit.getPlayerManager().getPlayer(nick);
@@ -74,7 +74,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 		   }
 			 }
 		   catch (NullPointerException e) {
-			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.");
+			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.").queue();
 			   }
 		
 	
