@@ -52,12 +52,13 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	          	 catch (Exception e) {
 	          	 	e.printStackTrace();
 	          	 }
-	         default:
-	            arg0.reply("I can't handle that command right now :(").setEphemeral(true).queue();
-	    }
+	        }
 	        }
 		protected boolean aa(@NotNull SlashCommandInteractionEvent arg0 , String nick) {
 		   WavePlayer p = WaveBukkit.getPlayerManager().getPlayer(nick);
+		   if (p == null) {
+			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.");
+		   }
 	       RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
 			if (provider != null) {
 	OfflinePlayer real = Bukkit.getOfflinePlayer(nick);
