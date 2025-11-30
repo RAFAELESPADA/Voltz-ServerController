@@ -17,6 +17,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import net.md_5.bungee.api.ChatColor;
+
 public final class NoBreakEvent
   implements Listener, CommandExecutor
 {
@@ -33,12 +35,12 @@ public final class NoBreakEvent
           if (!embuild.contains(p))
           {
             embuild.add(p);
-            p.sendMessage(String.valueOf("§c§lBUILD") + "§aAgora voc§ pode editar a fps");
+            p.sendMessage(String.valueOf("§c§lSKYZERMC ") + "§aAgora você pode construir nesse lobby");
           }
           else
           {
             embuild.remove(p);
-            p.sendMessage(String.valueOf("§c§lBUILD") + "§cVoc§ agora n§o pode editar a fps");
+            p.sendMessage(String.valueOf("§c§lSKYZERMC ") + "§cVocê agora não pode mais construir nesse lobby");
           }
         }
         else
@@ -46,23 +48,23 @@ public final class NoBreakEvent
           Player t = Bukkit.getPlayer(args[0]);
           if (t == null)
           {
-            p.sendMessage("§c§lBUILD" + "§cThis player is offline");
+            p.sendMessage("§c§lBUILD" + "§cEsse jogador está offline");
             return true;
           }
           if (!embuild.contains(t))
           {
             embuild.add(t);
-            p.sendMessage(String.valueOf("§c§lBUILD") + "§aNow: §7" + t.getName() + " §acan edit kitpvp arena");
+            p.sendMessage(String.valueOf("§c§lSKYZERMC ") + "§aAgora: §7" + t.getName() + " §apode editar esse lobby");
           }
           else
           {
             embuild.remove(t);
-            p.sendMessage(String.valueOf("§c§lBUILD") + "§aPlayer: §7" + t.getName() + " §ano longer can edit kitpvp arena");
+            p.sendMessage(String.valueOf("§c§lSKYZERMC ") + "§aAgora: §7" + t.getName() + " §anão pode mais editar esse lobby");
           }
         }
       }
       else {
-        p.sendMessage(String.valueOf("§c§lBUILD") + "§cVoc§ n§o tem acesso a esse comando!");
+        p.sendMessage(String.valueOf("§c§lSKYZERMC ") + "§fVocê precisa ser Administrador ou superior para executar esse comando.");
       }
     }
     return false;
@@ -72,8 +74,12 @@ public final class NoBreakEvent
   public void aoconstruir(BlockPlaceEvent e)
   {
     Player p = e.getPlayer();
+    if (p.getWorld().equals(Bukkit.getWorld("spawn")) || p.getWorld().equals(Bukkit.getWorld("spawnbw")) || p.getWorld().equals(Bukkit.getWorld("world"))) {
     if (!embuild.contains(p)) {
       e.setCancelled(true);
+      p.sendMessage(ChatColor.RED + "Você não pode quebrar esse bloco nessa área protegida sem autorização.");
+      p.sendMessage(ChatColor.RED + "Utilize /build para habilitar o modo de edição");
+    }
     }
   }
   
@@ -81,10 +87,14 @@ public final class NoBreakEvent
   public void aoconstruir(BlockBreakEvent e)
   {
     Player p = e.getPlayer();
+    if (p.getWorld().equals(Bukkit.getWorld("spawn")) || p.getWorld().equals(Bukkit.getWorld("spawnbw")) || p.getWorld().equals(Bukkit.getWorld("world"))) {
     if (!embuild.contains(p)) {
+        p.sendMessage(ChatColor.RED + "Você não pode quebrar esse bloco nessa área protegida sem autorização.");
+        p.sendMessage(ChatColor.RED + "Utilize /build para habilitar o modo de edição");
       e.setCancelled(true);
     }
   }
+}
 }
 
 

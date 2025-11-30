@@ -16,7 +16,7 @@ public class BungeeSend {
 	    ByteArrayDataOutput out = ByteStreams.newDataOutput();
 	 try {
 		 if (from.getServer() == to.getServer()) {
-	     	 from.sendMessage("§cVoc§ j§ est§ no servidor desse jogador.");
+	     	 from.sendMessage("§cVocê já está no servidor desse jogador.");
 	     	 from.sendMessage("§cUtilize /tp para ir para ele.");
 	          return;
 	        	
@@ -27,7 +27,7 @@ public class BungeeSend {
 	     
 	      from.getServer().getInfo()
 	        .sendData(Main.channel, byteArrayOut.toByteArray());
-	      Main.getInstance().getLogger().log(Level.INFO, "Canais do bungee receberam informa§§es!");
+	      Main.getInstance().getLogger().log(Level.INFO, "Canais do bungee receberam informações!");
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    

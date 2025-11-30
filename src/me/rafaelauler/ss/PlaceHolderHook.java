@@ -73,7 +73,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
      */
     @Override
     public String getIdentifier(){
-        return "solgleems";
+        return "skyzermc";
     }
 
     /**

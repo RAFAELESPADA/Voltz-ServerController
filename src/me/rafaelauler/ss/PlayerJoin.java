@@ -75,13 +75,14 @@ public class PlayerJoin implements Listener {
 	        	    		Bukkit.getConsoleSender().sendMessage("Enviando " + player.getName() + " ao lobby do servidor!");
 	        	    		player.sendMessage(ChatColor.AQUA + "Bem vindo ao SkyzerMC!");
 	        	    		player.sendMessage(ChatColor.AQUA + "Nosso Discord: " + ChatColor.WHITE + "https://discord.gg/PN9xfpf6FG");
+	        	    		if (!api2.getUserManager().getUser(player.getUniqueId()).getPrimaryGroup().equals("default")) {
+	        	    		player.sendMessage(ChatColor.AQUA + "DICA: Utilize /prefixo <Tag> para alterar sua tag");
+	        	    		}
 	                   itemAPI.getItems(player);
 	            }}.runTaskLater(BukkitMain.plugin, 25l);
 new BukkitRunnable() {
 	                
-	                public void run() {
-	                	Bukkit.getConsoleSender().sendMessage("Re-Enviando " + player.getName() + " ao lobby do servidor!");
-        	    		
+	                public void run() {		
 	                	Location l = new Location(Bukkit.getWorld("spawn"), 147.175, 68.000, -121.495);
 	            		l.setPitch((float)5.6);
 	            		l.setYaw((float)90.0);

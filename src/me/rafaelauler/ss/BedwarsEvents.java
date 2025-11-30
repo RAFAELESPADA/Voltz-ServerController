@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import com.andrei1058.bedwars.api.BedWars;
 
 import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.model.user.UserManager;
@@ -26,7 +26,7 @@ import net.wavemc.core.bukkit.WaveBukkit;
 import net.wavemc.core.bukkit.account.WavePlayer;
 
 
-	public class BedwarsEvents implements Listener {
+	public class BedwarsEvents extends ListenerAdapter {
 	    private final BukkitMain plugin;
 	    private final LuckPerms luckPerms;
 	    public static Economy econ = null;
@@ -36,7 +36,6 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	        this.luckPerms = luckPerms;
 	    }
 	    BedWars bedwarsAPI = Bukkit.getServicesManager().getRegistration(BedWars.class).getProvider();
-	    
 	    public void onSlashCommandInteraction(SlashCommandInteractionEvent arg0)
 	    {
 	        // Only accept commands from guilds
@@ -45,7 +44,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	        switch (arg0.getName())
 	        {
 	        
-	        case "status":
+	        case "perfil":
 	          	 try {
 	               aa(arg0, arg0.getOption("nick").getAsString()); // content is required so no null-check here
 	               break;
@@ -53,28 +52,32 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	          	 catch (Exception e) {
 	          	 	e.printStackTrace();
 	          	 }
-	         default:
-	            arg0.reply("I can't handle that command right now :(").setEphemeral(true).queue();
-	    }
+	        }
 	        }
 		protected boolean aa(@NotNull SlashCommandInteractionEvent arg0 , String nick) {
-		   WavePlayer p = WaveBukkit.getInstance().getPlayerManager().getPlayer(nick);
+			 try {
+			 if (WaveBukkit.getPlayerManager().getPlayer(nick) == null) {
+				   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.").queue();
+				   return true;
+			   }
+		   WavePlayer p = WaveBukkit.getPlayerManager().getPlayer(nick);
+		  
 	       RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
 			if (provider != null) {
 	OfflinePlayer real = Bukkit.getOfflinePlayer(nick);
 			    LuckPerms api = provider.getProvider();
 				
-		   try {
+		  
 
-		   arg0.reply("**INFORMAÇÕES DE ESTATÍSTICAS DO JOGADOR **" + p.getName() + "\nKills ( KITPVP ): " + p.getPvp().getKills() + "\nMortes: " + p.getPvp().getDeaths() + "\nKillStreak atual ( KITPVP ): " + p.getPvp().getKillstreak() + "\nKills na FPS ( KITPVP ): " + p.getPvp().getKillsfps() + "\nWins ( Sumô ): " + p.getPvp().getWinssumo() + "\nWins no duelos (1v1): " + p.getPvp().getWinsx1() + "\nXP: " + p.getPvp().getXp() + "\nCoins: " + p.getPvp().getCoins() + "\nMortes no 1v1: " + p.getPvp().getDeathsx1() + "\nWinStreak no 1v1: " + p.getPvp().getWinstreakx1() + "\nCargo: " + giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() + "\nKills ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerKills(real.getUniqueId()) + "\nMortes ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerDeaths(real.getUniqueId()) + "\nWins ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerWins(real.getUniqueId()) + "\nCamas Destrúidas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerBedsDestroyed(real.getUniqueId()) + "\nPerdas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerLoses(real.getUniqueId()) + "\nPartidas Jogadas (BedWars): " + bedwarsAPI.getStatsUtil().getPlayerGamesPlayed(real.getUniqueId()) + "\n Nível ( Bedwars ): " + bedwarsAPI.getLevelsUtil().getCurrentXp(real.getPlayer())).queue();
+		   arg0.reply("**INFORMAÇÕES DE ESTATÍSTICAS DO JOGADOR **" + p.getName() + "\nKills ( KITPVP ): " + p.getPvp().getKills() + "\nMortes: " + p.getPvp().getDeaths() + "\nKillStreak atual ( KITPVP ): " + p.getPvp().getKillstreak() + "\nKills na FPS ( KITPVP ): " + p.getPvp().getKillsfps() + "\nWins ( Sumô ): " + p.getPvp().getWinssumo() + "\nWins no duelos (1v1): " + p.getPvp().getWinsx1() + "\nXP: " + p.getPvp().getXp() + "\nCoins: " + p.getPvp().getCoins() + "\nMortes no 1v1: " + p.getPvp().getDeathsx1() + "\nWinStreak no 1v1: " + p.getPvp().getWinstreakx1() + "\nCargo: " + giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() == "LYZE" ? "DIRETOR" : giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() + "\nKills ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerKills(p.getUuid()) + "\nMortes ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerDeaths(p.getUuid()) + "\nWins ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerWins(p.getUuid()) + "\nCamas Destrúidas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerBedsDestroyed(p.getUuid()) + "\nPerdas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerLoses(p.getUuid()) + "\nPartidas Jogadas (BedWars): " + bedwarsAPI.getStatsUtil().getPlayerGamesPlayed(p.getUuid()) + "\nCoins: " + Eventos.econ.getBalance(real)).queue();
 		   return true; 
 		   }
-		   catch (Exception e) {
-			   arg0.reply("Um erro ocorreu").setEphemeral(true).queue();
-			   e.printStackTrace();
+			 }
+		   catch (NullPointerException e) {
+			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.").queue();
 			   }
 		
-	}
+	
 			return false;
 		}
 		public User giveMeADamnUser(UUID uniqueId) {
@@ -92,5 +95,6 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 		Player player = e.getPlayer();
 	       
 	}
+	
 	}
 	

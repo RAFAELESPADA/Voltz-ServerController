@@ -48,11 +48,11 @@ public final class Modo
             
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " clear");
 
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission settemp utils.staffchat.use true 6h");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission settemp stormplugins.lobby.staffchat true 6h");
             p.sendMessage(String.valueOf("§c§lSTAFF") + "§a Você saiu do modo staff");
             savegroup.put(p.getName(), api.getUserManager().getUser(p.getUniqueId()).getPrimaryGroup());
-            p.sendMessage(String.valueOf("§c§lSTAFF") + "§a Você perdeu suas permissÕes");
-            Bukkit.broadcast(ChatColor.GREEN + "STAFF " + p.getName() + " saiu do modo staff e perdeu suas permissões temporariamente", "utils.staffchat.use");
+            p.sendMessage(String.valueOf("§c§lSTAFF") + "§a Você perdeu suas permissões");
+            Bukkit.broadcast(ChatColor.GREEN + "STAFF " + p.getName() + " saiu do modo staff e perdeu suas permissões temporariamente", "stormplugins.lobby.staffchat");
           }
 
           else
@@ -64,7 +64,7 @@ public final class Modo
             p.setOp(isop.get(p.getName()));
 
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " parent set " + savegroup.get(p.getName()));
-            Bukkit.broadcast(ChatColor.GREEN + "STAFF " + p.getName() + " entrou no modo staff e ganhou suas permissões novamente", "utils.staffchat.use");
+            Bukkit.broadcast(ChatColor.GREEN + "STAFF " + p.getName() + " entrou no modo staff e ganhou suas permissões novamente", "stormplugins.lobby.staffchat");
             p.sendMessage(String.valueOf("§c§lSTAFF") + "§cSuas permissões retornaram");
             api.getUserManager().loadUser(p.getUniqueId());
           }

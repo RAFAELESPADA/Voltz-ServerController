@@ -33,10 +33,14 @@ public class ReportCMD extends Command {
             return;
         }
         if (impossibleToBan(targetName)) {
-        	   sender.sendMessage("§cUtilize o /report apenas para denunciar jogadores.");
+        	   sender.sendMessage("§cUtilize o /report apenas para denunciar jogadores comuns.");
                return;
            
         }
+        if (targetPlayer.hasPermission("*")) {
+     	   sender.sendMessage("§cUtilize o /report apenas para denunciar jogadores comuns.");
+            return;
+     }
         if (targetName.equalsIgnoreCase(sender.getName())) {
             sender.sendMessage("§cVocê não pode se reportar");
             return;
@@ -51,8 +55,9 @@ public class ReportCMD extends Command {
         String reason = reasonBuilder.toString().trim();
         HelixCooldown.create(sender.getName(), "report", TimeUnit.SECONDS, 60L);
         TextComponent teleport = new TextComponent("§cClique §f§lAQUI §cpara se teleportar até o §cservidor do §cjogador.");
-        teleport.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/btp " + targetName));
+        teleport.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, BTP.TeleportCorrectly() + targetName));
         sender.sendMessage("§cVocê reportou " + targetPlayer.getName() + " por " + reason);
+        sender.sendMessage("§aAguarde sua dénuncia ser analisada");
 
         Title t = ProxyServer.getInstance().createTitle();
         ProxyServer.getInstance().getPlayers().stream().filter(online -> online.hasPermission("stormplugins.lobby.staffchat"))
