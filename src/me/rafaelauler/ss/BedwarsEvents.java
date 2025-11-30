@@ -69,7 +69,11 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 				
 		  
 
+<<<<<<< HEAD
 		   arg0.reply("**INFORMAÇÕES DE ESTATÍSTICAS DO JOGADOR **" + p.getName() + "\nKills ( KITPVP ): " + p.getPvp().getKills() + "\nMortes: " + p.getPvp().getDeaths() + "\nKillStreak atual ( KITPVP ): " + p.getPvp().getKillstreak() + "\nKills na FPS ( KITPVP ): " + p.getPvp().getKillsfps() + "\nWins ( Sumô ): " + p.getPvp().getWinssumo() + "\nWins no duelos (1v1): " + p.getPvp().getWinsx1() + "\nXP: " + p.getPvp().getXp() + "\nCoins: " + p.getPvp().getCoins() + "\nMortes no 1v1: " + p.getPvp().getDeathsx1() + "\nWinStreak no 1v1: " + p.getPvp().getWinstreakx1() + "\nCargo: " + giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() == "LYZE" ? "DIRETOR" : giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() + "\nKills ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerKills(p.getUuid()) + "\nMortes ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerDeaths(p.getUuid()) + "\nWins ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerWins(p.getUuid()) + "\nCamas Destrúidas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerBedsDestroyed(p.getUuid()) + "\nPerdas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerLoses(p.getUuid()) + "\nPartidas Jogadas (BedWars): " + bedwarsAPI.getStatsUtil().getPlayerGamesPlayed(p.getUuid()) + "\nCoins: " + Eventos.econ.getBalance(real)).queue();
+=======
+		   arg0.reply("**INFORMAÇÕES DE ESTATÍSTICAS DO JOGADOR **" + p.getName() + "\nKills ( KITPVP ): " + p.getPvp().getKills() + "\nMortes: " + p.getPvp().getDeaths() + "\nKillStreak atual ( KITPVP ): " + p.getPvp().getKillstreak() + "\nKills na FPS ( KITPVP ): " + p.getPvp().getKillsfps() + "\nWins ( Sumô ): " + p.getPvp().getWinssumo() + "\nWins no duelos (1v1): " + p.getPvp().getWinsx1() + "\nXP: " + p.getPvp().getXp() + "\nCoins: " + p.getPvp().getCoins() + "\nMortes no 1v1: " + p.getPvp().getDeathsx1() + "\nWinStreak no 1v1: " + p.getPvp().getWinstreakx1() + "\nCargo: " + giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() + "\nKills ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerKills(p.getUuid()) + "\nMortes ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerDeaths(p.getUuid()) + "\nWins ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerWins(p.getUuid()) + "\nCamas Destrúidas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerBedsDestroyed(p.getUuid()) + "\nPerdas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerLoses(p.getUuid()) + "\nPartidas Jogadas (BedWars): " + bedwarsAPI.getStatsUtil().getPlayerGamesPlayed(p.getUuid())).queue();
+>>>>>>> c3d04a097994f28f504d1cba2c6d3d067d971ad7
 		   return true; 
 		   }
 			 }
@@ -97,4 +101,8 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	}
 	
 	}
+<<<<<<< HEAD
 	
+=======
+	
+>>>>>>> c3d04a097994f28f504d1cba2c6d3d067d971ad7
