@@ -53,11 +53,8 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-<<<<<<< HEAD
     public final String TOKEN = "NULO";
-=======
-    public final String TOKEN = "NULL";
->>>>>>> c3d04a097994f28f504d1cba2c6d3d067d971ad7
+
     private int rotate = 0, dropID = 0;
 
     public String ifNullEmpty(String check) {
@@ -79,13 +76,11 @@ commands.addCommands(
                
     .setDefaultPermissions(DefaultMemberPermissions.ENABLED)) // only admins should be able to use this command.
 ;
-<<<<<<< HEAD
 commands.queue();
 Bukkit.getConsoleSender().sendMessage("COMANDO DO BOT REGISTRADO /perfil no discord server");
-=======
+
 		// Then finally send your commands to discord using the API
 		  commands.queue();
->>>>>>> c3d04a097994f28f504d1cba2c6d3d067d971ad7
 if (MCVersion.get().isInferior(MCVersion.v1_13)) {
     channel2 = "bungee:teleport"; 
 }
