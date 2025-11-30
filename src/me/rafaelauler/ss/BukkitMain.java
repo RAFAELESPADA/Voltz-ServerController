@@ -53,7 +53,8 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-    public final String TOKEN = "NULL";
+    public final String TOKEN = "NULO";
+
     private int rotate = 0, dropID = 0;
 
     public String ifNullEmpty(String check) {
@@ -75,6 +76,9 @@ commands.addCommands(
                
     .setDefaultPermissions(DefaultMemberPermissions.ENABLED)) // only admins should be able to use this command.
 ;
+commands.queue();
+Bukkit.getConsoleSender().sendMessage("COMANDO DO BOT REGISTRADO /perfil no discord server");
+
 		// Then finally send your commands to discord using the API
 		  commands.queue();
 if (MCVersion.get().isInferior(MCVersion.v1_13)) {
@@ -154,6 +158,9 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
   getCommand("tempogrupo").setExecutor(new TempoGrupoBukkit());
   getCommand("grupo").setExecutor(new GrupoBukkit());
   getCommand("creport").setExecutor(new Report());
+  getCommand("prefixo").setExecutor(new TagCommand());
+
+  getCommand("build").setExecutor(new NoBreakEvent());
   getCommand("manutencao").setExecutor(new Manutencao(this, this.luckPerms));
   getCommand("ctag").setExecutor(new cTag(this, this.luckPerms));
   getCommand("jogarbw").setExecutor(new JogarBW(this, this.luckPerms));
@@ -185,7 +192,8 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
     	Bukkit.getConsoleSender().sendMessage("[REPORT] EVENTOS INICIANDO");
     	pm.registerEvents(new PlayerJoin(this), this);
     	pm.registerEvents(new Perfil(), this);
-     			
+    	pm.registerEvents(new NoBreakEvent(), this);
+ 			
     	pm.registerEvents(new Eventos(this, this.luckPerms), this);
     }
 
