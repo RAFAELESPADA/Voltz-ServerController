@@ -21,8 +21,10 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/PAPIProxyBridge-Bukkit-1.8.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/KP-PVP-v1.8-1.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/ItemJoin.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/bedwars-plugin-25.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/KP-CORE-v4.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/TAB v5.2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC BACKUP GERAL/LOBBY/plugins/bedwars-plugin-25.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC BACKUP GERAL/LOBBY/plugins/TAB v5.2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC BACKUP GERAL/LOBBY/plugins/KP-CORE-v4.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC BACKUP GERAL/LOBBY/plugins/worldguard-6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC BACKUP GERAL/LOBBY/plugins/WorldEdit.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -53,7 +53,7 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-    public final String TOKEN = "BOT TOKEN";
+    public final String TOKEN = "NULO";
 
 
     private int rotate = 0, dropID = 0;
@@ -67,12 +67,13 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     public void onEnable() {
     	  plugin = this;
 registerEvents();
+if (Bukkit.getPluginManager().getPlugin("BedWars1058") != null) {
 JDA jda = JDABuilder.createLight(TOKEN, EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)).addEventListeners(new BedwarsEvents(this, this.luckPerms))
 .build();
 CommandListUpdateAction commands = jda.updateCommands();
 
 commands.addCommands(
-		  Commands.slash("perfil", "Veja status de kitpvp e bedwars de um jogador")
+		  Commands.slash("perfil", "Veja status de kitpvp , bedwars e rankup de um jogador")
               .addOption(OptionType.STRING, "nick", "Nick do jogador", true) // you can add required options like this too
                
     .setDefaultPermissions(DefaultMemberPermissions.ENABLED)) // only admins should be able to use this command.
@@ -80,8 +81,14 @@ commands.addCommands(
 commands.queue();
 Bukkit.getConsoleSender().sendMessage("COMANDO DO BOT REGISTRADO /perfil no discord server");
 
+
 		// Then finally send your commands to discord using the API
 		  commands.queue();
+}
+else {
+	Bukkit.getConsoleSender().sendMessage("IGNORANDO REGISTRO DO BOT NESSE SERVIDOR");
+
+}
 if (MCVersion.get().isInferior(MCVersion.v1_13)) {
     channel2 = "bungee:teleport"; 
 }
@@ -102,9 +109,12 @@ if (PlayerGroup.getRoles().isEmpty()) {
 	     // Spawn an invisible armor stand at the location
 	ArmorStand armorStand;
 	ArmorStand armorStand2;
-
+	ArmorStand armorStand3;
+	ArmorStand armorStand4;
     armorStand = (ArmorStand) Bukkit.getWorld("spawnbw").spawnEntity(new Location(Bukkit.getWorld("spawnbw"), 22.547, 71.45989, 9.654), EntityType.ARMOR_STAND);
     armorStand2 = (ArmorStand) Bukkit.getWorld("spawnbw").spawnEntity(new Location(Bukkit.getWorld("spawnbw"), 22.547, 71.45989, -17.499), EntityType.ARMOR_STAND);
+    armorStand3 = (ArmorStand) Bukkit.getWorld("spawn").spawnEntity(new Location(Bukkit.getWorld("spawn"), 125.459, 70.5415, -115.5150), EntityType.ARMOR_STAND);
+    armorStand4 = (ArmorStand) Bukkit.getWorld("spawn").spawnEntity(new Location(Bukkit.getWorld("spawn"), 125.459, 70.5415, -128.125), EntityType.ARMOR_STAND);
 
 	     armorStand.setVisible(false);
 	     armorStand.setGravity(false);
@@ -112,7 +122,14 @@ if (PlayerGroup.getRoles().isEmpty()) {
 
 	     armorStand2.setVisible(false);
 	     armorStand2.setGravity(false);
-	     armorStand2.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
+	     armorStand2.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));
+	     armorStand3.setVisible(false);
+	     armorStand3.setGravity(false);
+	     armorStand3.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));
+
+	     armorStand4.setVisible(false);
+	     armorStand4.setGravity(false);
+	     armorStand4.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
 	  // Run this task repeatedly every game tick (20 ticks per second)
 
 	  	Bukkit.getConsoleSender().sendMessage("(spawning bw animated armor stands)");
@@ -135,9 +152,52 @@ if (PlayerGroup.getRoles().isEmpty()) {
                 }
                 armorStand.setHeadPose(new EulerAngle(0, y, 0));
                 armorStand2.setHeadPose(new EulerAngle(0, y, 0));
+
+                armorStand3.setHeadPose(new EulerAngle(0, y, 0));
+                armorStand4.setHeadPose(new EulerAngle(0, y, 0));
             }
         }.runTaskTimer(BukkitMain.plugin, 1, 1);
-    Bukkit.getConsoleSender().sendMessage("(spawned bw animated generators on lobby with sucess)");
+	
+	}  else {
+		ArmorStand armorStand;
+		ArmorStand armorStand2;
+
+	    armorStand = (ArmorStand) Bukkit.getWorld("world").spawnEntity(new Location(Bukkit.getWorld("world"), 594.127, 44.14441, 598.247), EntityType.ARMOR_STAND);
+	    armorStand2 = (ArmorStand) Bukkit.getWorld("world").spawnEntity(new Location(Bukkit.getWorld("world"), 606.153, 44.144441, 597.731), EntityType.ARMOR_STAND);
+
+		     armorStand.setVisible(false);
+		     armorStand.setGravity(false);
+		     armorStand.getEquipment().setHelmet(new ItemStack(Material.LAPIS_BLOCK));
+
+		     armorStand2.setVisible(false);
+		     armorStand2.setGravity(false);
+		     armorStand2.getEquipment().setHelmet(new ItemStack(Material.REDSTONE_BLOCK));// Place the item in its "hand"
+		  // Run this task repeatedly every game tick (20 ticks per second)
+
+		  	Bukkit.getConsoleSender().sendMessage("(spawning rankup animated armor stands)");
+		  	new BukkitRunnable() {
+
+	            double y = 0;
+	            boolean increase = true;
+
+	            @Override
+	            public void run() {
+	                if (y >= Math.PI * 6) {
+	                    increase = false;
+	                } else if (y <= 0) {
+	                    increase = true;
+	                }
+	                if (increase) {
+	                    y += 0.2;
+	                } else {
+	                    y -= 0.2;
+	                }
+	                armorStand.setHeadPose(new EulerAngle(0, y, 0));
+	                armorStand2.setHeadPose(new EulerAngle(0, y, 0));
+	            }	
+		  			  	
+}.runTaskTimer(BukkitMain.plugin, 1, 1);
+    Bukkit.getConsoleSender().sendMessage("(spawned rankup animated generators on rankup with sucess)");
 }
 
 	
@@ -161,7 +221,7 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
   getCommand("creport").setExecutor(new Report());
   getCommand("tag").setExecutor(new TagCommand());
   getCommand("prefixo").setExecutor(new TagCommand());
-
+  getCommand("givegun").setExecutor(new GiveGun());
   getCommand("build").setExecutor(new NoBreakEvent());
   getCommand("manutencao").setExecutor(new Manutencao(this, this.luckPerms));
   getCommand("ctag").setExecutor(new cTag(this, this.luckPerms));
@@ -180,13 +240,31 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
         Bukkit.getConsoleSender().sendMessage("[TELEPORT] PLUGIN DESLIGADO COM SUCESSO");
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
         this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
+        if (Bukkit.getWorld("spawnbw") != null) {
        for (Entity e: Bukkit.getWorld("spawnbw").getEntities()) {
     	   if (e instanceof ArmorStand) {
     		   if (e != null) {
     		   e.remove();
     		   }
+    		   for (Entity e3 : Bukkit.getWorld("spawn").getEntities()) {
+    	    	   if (e3 instanceof ArmorStand) {
+    	    		   if (e3 != null) {
+    	    		   e3.remove();
+    	    		   }
+    	   } else { 
+    	   for (Entity e2 : Bukkit.getWorld("world").getEntities()) {
+    		    	   if (e2 instanceof ArmorStand) {
+    		    		   if (e2 != null) {
+    		    		   e.remove();
+    		    		   }		   
+    		    	   }
+    	   }
     	   }
        }
+    	   }}}
+       
+       
+       
     }
 
     public void registerEvents(){
@@ -195,7 +273,7 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
     	pm.registerEvents(new PlayerJoin(this), this);
     	pm.registerEvents(new Perfil(), this);
     	pm.registerEvents(new NoBreakEvent(), this);
- 			
+    	pm.registerEvents(new Gun(), this);	
     	pm.registerEvents(new Eventos(this, this.luckPerms), this);
     }
 
