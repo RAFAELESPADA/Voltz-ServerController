@@ -9,19 +9,20 @@ import org.bukkit.entity.Player;
 
 public enum PlayerGroup {
 
-    DIRETOR("Lyze", 1, "Diretor", "tag.diretor", ChatColor.GOLD, 1),
+    DIRETOR("Diretor", 1, "Diretor", "tag.diretor", ChatColor.GOLD, 1),
     GERENTE("Gerente", 2, "Gerente", "tag.gerente", ChatColor.DARK_PURPLE, 2),
-    ADMIN("Administrador", 3, "Admin", "tag.admin", ChatColor.DARK_RED, 3),
-    CONSTRUTOR("Construtor", 4, "Construtor", "tag.construtor", ChatColor.LIGHT_PURPLE, 4),
-    MOD("Moderador", 5, "Mod", "tag.mod", ChatColor.DARK_GREEN, 5),
-    AJUDANTE("Ajudante", 6, "Ajudante", "tag.ajudante", ChatColor.YELLOW, 6),
-    INFLUENCER("Youtuber", 7, "Creator", "tag.influencer", ChatColor.RED, 7),
-    BETA("Beta", 8, "Beta", "tag.beta", ChatColor.DARK_BLUE , 8),
-    LORD("Lord", 9, "Lord", "tag.lord", ChatColor.AQUA , 9),
-    KNIGHT("Knight", 10, "Knight", "tag.knight", ChatColor.DARK_AQUA , 10),
-    HUNTER("Hunter", 11, "Hunter", "tag.hunter", ChatColor.DARK_PURPLE , 11),
-    NITRO("Nitro", 12, "Nitro", "tag.nitro", ChatColor.LIGHT_PURPLE , 12),
-    DEFAULT("Default", 13, "Membro", "tag.membro", ChatColor.GRAY, 13);
+    PATROCINADOR("Patrocinador", 3, "Patrocinador", "tag.patrocinador", ChatColor.GREEN , 11),
+    ADMIN("Administrador", 4, "Administrador", "tag.admin", ChatColor.DARK_RED, 3),       
+    SENIORMOD("SeniorMod", 5, "SeniorMod", "tag.seniormod", ChatColor.DARK_AQUA, 5),
+    CONSTRUTOR("Construtor", 6, "Construtor", "tag.construtor", ChatColor.LIGHT_PURPLE, 6),
+    MOD("Moderador", 7, "Moderador", "tag.mod", ChatColor.DARK_GREEN, 7),
+    AJUDANTE("Ajudante", 8, "Ajudante", "tag.ajudante", ChatColor.YELLOW, 8),
+    INFLUENCER("Influencer", 9, "Influencer", "tag.influencer", ChatColor.RED, 9),
+    LEGEND("Legend", 10, "Legend", "tag.legend", ChatColor.GOLD , 10),
+    TITAN("Titan", 11, "Titan", "tag.titan", ChatColor.BLUE , 11),
+    ELITE("Elite", 12, "Elite", "tag.elite", ChatColor.AQUA , 12),
+    NITRO("Nitro", 13, "Nitro", "tag.nitro", ChatColor.LIGHT_PURPLE , 13),
+    DEFAULT("Default", 14, "Default", "tag.default", ChatColor.GRAY, 14);
 
     private final String name;
     private final String permission;

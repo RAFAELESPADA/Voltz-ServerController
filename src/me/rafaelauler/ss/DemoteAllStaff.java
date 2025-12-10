@@ -34,10 +34,11 @@ import net.md_5.bungee.api.plugin.Command;
 	    	case "staff":
 	    	PermissionNode node = PermissionNode.builder("stormplugins.lobby.staffchat").build();
 	    api.getUserManager().getLoadedUsers().forEach(u -> { if (u.getUsername() != sender.getName() && (u.getNodes().contains(node))) {
-	    api.getUserManager().deletePlayerData(u.getUniqueId());	
+	    api.getUserManager().deletePlayerData(u.getUniqueId());
+	    
+	    }});
 	    sender.sendMessage(ChatColor.RED + "Todos da equipe foram demotados! Exceto você!");
 
-	    }});
 	    break;
 			  case "diretor":
 			    	PermissionNode node2gf = PermissionNode.builder("group.lyze").build();

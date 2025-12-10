@@ -76,7 +76,7 @@ public class PlayerJoin implements Listener {
 	        	    		player.sendMessage(ChatColor.AQUA + "Bem vindo ao SkyzerMC!");
 	        	    		player.sendMessage(ChatColor.AQUA + "Nosso Discord: " + ChatColor.WHITE + "https://discord.gg/PN9xfpf6FG");
 	        	    		if (!api2.getUserManager().getUser(player.getUniqueId()).getPrimaryGroup().equals("default")) {
-	        	    		player.sendMessage(ChatColor.AQUA + "DICA: Utilize /prefixo <Tag> para alterar sua tag");
+	        	    		player.sendMessage(ChatColor.AQUA + "DICA: Utilize /tag <Tag> para alterar sua tag");
 	        	    		}
 	                   itemAPI.getItems(player);
 	            }}.runTaskLater(BukkitMain.plugin, 25l);

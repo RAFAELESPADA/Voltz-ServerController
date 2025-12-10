@@ -53,7 +53,7 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-    public final String TOKEN = "NULO";
+    public final String TOKEN = "BOT TOKEN";
 
     private int rotate = 0, dropID = 0;
 
@@ -158,7 +158,7 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
   getCommand("tempogrupo").setExecutor(new TempoGrupoBukkit());
   getCommand("grupo").setExecutor(new GrupoBukkit());
   getCommand("creport").setExecutor(new Report());
-  getCommand("prefixo").setExecutor(new TagCommand());
+  getCommand("tag").setExecutor(new TagCommand());
 
   getCommand("build").setExecutor(new NoBreakEvent());
   getCommand("manutencao").setExecutor(new Manutencao(this, this.luckPerms));

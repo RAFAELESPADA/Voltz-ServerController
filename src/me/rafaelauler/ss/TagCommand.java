@@ -2,7 +2,6 @@ package me.rafaelauler.ss;
 
 
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -118,14 +117,6 @@ try {
             
             // Tell the sender.
             cooldowns.put(player.getName() + "EPT", System.currentTimeMillis() + 7 * 1000);
-            if (args[0].equalsIgnoreCase("diretor")) {
-            	sender.sendMessage("§a§lTAG: §fSua tag foi alterada para §6[Diretor]");
-                if (Bukkit.getPluginManager().isPluginEnabled("TAB")) {
-                	   TabAPI apitab = TabAPI.getInstance();
-                apitab.getPlayer(player.getName()).setTemporaryGroup("lyze");
-                tagatual.put(player, args[0]);	
-            }
-                else {
             sender.sendMessage("§a§lTAG: §fSua tag foi alterada para " + (args[0].equalsIgnoreCase("Membro") || (args[0].equalsIgnoreCase("default")) ? "§7[Membro]" : ChatColor.RESET + prefix.replace("&", "§")));
             if (Bukkit.getPluginManager().isPluginEnabled("TAB")) {
             	   TabAPI apitab = TabAPI.getInstance();
@@ -133,7 +124,7 @@ try {
             tagatual.put(player, args[0]);
             }
             Bukkit.getConsoleSender().sendMessage(player.getName() + " alterou a tag para " + args[0]);
-                }}});
+        });
 } catch (NullPointerException e) {
 	sender.sendMessage(ChatColor.RED + "§cVocê não tem essa tag ou ela não existe.");
 }
