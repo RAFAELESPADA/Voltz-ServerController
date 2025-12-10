@@ -54,5 +54,16 @@ public static void teleport(ProxiedPlayer from, ProxiedPlayer to) {
     ScheduledTask schedule = ProxyServer.getInstance().getScheduler().schedule(Main.getInstance(), () -> BungeeSend.teleport(from, to), 1L, TimeUnit.SECONDS);
    
   }
+
+public static String TeleportCorrectly() {
+	if (BukkitMain.plugin != null) {
+		return "tp ";
+	}
+	else {
+		return "btp ";
+	}
 }
+
+}
+
   

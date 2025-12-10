@@ -1,7 +1,8 @@
-name: BWPlugin
+name: ServerController
 author: Rafael Auler
 main: me.rafaelauler.ss.BukkitMain
-version: 1.0
+description: skyzermc.com.br
+version: 2.0
 loadbefore: [KPCore]
 depend: [ProtocolLib]
 softdepend: [AuraSkills, yPlugins]
@@ -20,6 +21,8 @@ commands:
   jogarbw:
   lobby:
   gorankup:
+  tag:
+  build:
   perfil:
   
   

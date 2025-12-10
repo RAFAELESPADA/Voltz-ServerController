@@ -20,6 +20,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -60,7 +61,11 @@ import net.milkbowl.vault.permission.Permission;
 	    	    p.playEffect(loc, Effect.MOBSPAWNER_FLAMES, (Object)null);
 	    	}
 	    	}
-
+	    @EventHandler
+			public void onJoivn(WeatherChangeEvent e) {
+		    /*     */   
+		    e.setCancelled(e.toWeatherState());
+		}
 	    @EventHandler
 		public void onJoivn(PlayerMoveEvent e) {
 	    /*     */   

@@ -14,7 +14,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/EVENTOS/plugins/yPoints-2.3.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/VOLTZMC/PVP-KP/plugins/yPlugins.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/VOLTZMC/PVP-KP/plugins/Vault.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/KOMBO-BACKUP-TOTAL/VOLTZMC/PVP-KP/plugins/KP-CORE-v4.0.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/spigot-1.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/LuckPerms-Bukkit-5.5.18.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SPRINTMC BACKUP/BUNGEE/server.jar"/>
@@ -23,5 +22,7 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/KP-PVP-v1.8-1.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/ItemJoin.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/bedwars-plugin-25.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/KP-CORE-v4.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/TAB v5.2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

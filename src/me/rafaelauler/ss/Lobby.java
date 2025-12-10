@@ -30,6 +30,22 @@ public class Lobby implements CommandExecutor {
     	if (Bukkit.getPluginManager().getPlugin("KP-PVP") != null) {
     	if (Join.game.contains(p.getName())) {
     		p.performCommand("kp leave");
+    		Location l = new Location(Bukkit.getWorld("spawn"), 147.175, 68.000, -121.495);
+    		l.setPitch((float)5.6);
+    		l.setYaw((float)90.0);
+            new BukkitRunnable() {
+                
+                public void run() {
+                    p.getInventory().clear();
+            }}.runTaskLater(BukkitMain.plugin, 10l);
+                
+            ItemJoinAPI itemAPI = new ItemJoinAPI();
+new BukkitRunnable() {
+                
+                public void run() {
+                   itemAPI.getItems(p);
+            }}.runTaskLater(BukkitMain.plugin, 25l);
+    		p.teleport(l);
     	}
     	}
     	if (p.getWorld().equals(Bukkit.getWorld("spawnbw"))) {

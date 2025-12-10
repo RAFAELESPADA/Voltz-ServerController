@@ -9,21 +9,20 @@ import org.bukkit.entity.Player;
 
 public enum PlayerGroup {
 
-    FUNDADOR("Fundador", 1, "Fundador", "tag.fundador", ChatColor.BLUE, 1),
-    VOLTZMC("VoltzMC", 2, "VoltzMC", "tag.voltzmc", ChatColor.GOLD, 2),
-    ADMIN("Admin", 3, "Admin", "tag.admin", ChatColor.DARK_RED, 3),
-    SUPERVISOR("Supervisor", 4, "Supervisor", "tag.supervisor", ChatColor.RED, 4),
-    MOD("Mod", 5, "Mod", "tag.mod", ChatColor.DARK_GREEN, 5),
-    BUILDER("Construtor", 6, "Construtor", "tag.construtor", ChatColor.BLUE, 6),
-    AJUDANTE("Ajudante", 7, "Ajudante", "tag.ajudante", ChatColor.YELLOW, 7),
-    INVEST("Invest", 8, "Invest", "tag.invest", ChatColor.GREEN, 8),
-    CREATORPLUS("Creator+", 9, "Creator+", "tag.creator+", ChatColor.BLUE, 9),
-    CREATOR("Creator", 10, "Creator", "tag.creator", ChatColor.RED, 10),
-    VIPPLUS("Vip+", 11, "Vip+", "tag.vip+", ChatColor.AQUA , 11),
-    VIP("Vip", 12, "Vip", "tag.vip", ChatColor.GREEN , 12),
-    APOIADOR("Apoiador", 13, "Apoiador", "tag.apoiador", ChatColor.DARK_PURPLE , 13),
-    BOOSTER("Booster", 14, "Booster", "tag.booster", ChatColor.LIGHT_PURPLE , 14),
-    MEMBRO("Membro", 23, "Membro", "tag.membro", ChatColor.GRAY, 16);
+    DIRETOR("Diretor", 1, "Diretor", "tag.diretor", ChatColor.GOLD, 1),
+    GERENTE("Gerente", 2, "Gerente", "tag.gerente", ChatColor.DARK_PURPLE, 2),
+    PATROCINADOR("Patrocinador", 3, "Patrocinador", "tag.patrocinador", ChatColor.GREEN , 11),
+    ADMIN("Administrador", 4, "Administrador", "tag.admin", ChatColor.DARK_RED, 3),       
+    SENIORMOD("SeniorMod", 5, "SeniorMod", "tag.seniormod", ChatColor.DARK_AQUA, 5),
+    CONSTRUTOR("Construtor", 6, "Construtor", "tag.construtor", ChatColor.LIGHT_PURPLE, 6),
+    MOD("Moderador", 7, "Moderador", "tag.mod", ChatColor.DARK_GREEN, 7),
+    AJUDANTE("Ajudante", 8, "Ajudante", "tag.ajudante", ChatColor.YELLOW, 8),
+    INFLUENCER("Influencer", 9, "Influencer", "tag.influencer", ChatColor.RED, 9),
+    LEGEND("Legend", 10, "Legend", "tag.legend", ChatColor.GOLD , 10),
+    TITAN("Titan", 11, "Titan", "tag.titan", ChatColor.BLUE , 11),
+    ELITE("Elite", 12, "Elite", "tag.elite", ChatColor.AQUA , 12),
+    NITRO("Nitro", 13, "Nitro", "tag.nitro", ChatColor.LIGHT_PURPLE , 13),
+    DEFAULT("Default", 14, "Default", "tag.default", ChatColor.GRAY, 14);
 
     private final String name;
     private final String permission;
@@ -80,7 +79,7 @@ public enum PlayerGroup {
                 return group;
             }
         }
-        return PlayerGroup.MEMBRO;
+        return PlayerGroup.DEFAULT;
     }
 
     public static String getPlayerNameWithGroup(Player player) {
