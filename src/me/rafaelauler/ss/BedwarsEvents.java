@@ -14,6 +14,7 @@ import com.andrei1058.bedwars.api.BedWars;
 
 import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.hooks.ListenerAdapter;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.model.user.UserManager;
@@ -32,7 +33,10 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	        this.plugin = plugin;
 	        this.luckPerms = luckPerms;
 	    }
-	    BedWars bedwarsAPI = Bukkit.getServicesManager().getRegistration(BedWars.class).getProvider();
+	    BedWars bedwarsAPI = Bukkit.getPluginManager().getPlugin("BedWars1058") != null ?
+		     Bukkit.getServicesManager().getRegistration(BedWars.class).getProvider() : null;
+	    
+	
 	    public void onSlashCommandInteraction(SlashCommandInteractionEvent arg0)
 	    {
 	        // Only accept commands from guilds
@@ -50,7 +54,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 	          	 	e.printStackTrace();
 	          	 }
 	        }
-	        }
+	    }
 		protected boolean aa(@NotNull SlashCommandInteractionEvent arg0 , String nick) {
 			 try {
 			 if (WaveBukkit.getPlayerManager().getPlayer(nick) == null) {
@@ -65,11 +69,16 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 			    LuckPerms api = provider.getProvider();
 				
 		  
-
-
-		   arg0.reply("**INFORMAÇÕES DE ESTATÍSTICAS DO JOGADOR **" + p.getName() + "\nKills ( KITPVP ): " + p.getPvp().getKills() + "\nMortes: " + p.getPvp().getDeaths() + "\nKillStreak atual ( KITPVP ): " + p.getPvp().getKillstreak() + "\nKills na FPS ( KITPVP ): " + p.getPvp().getKillsfps() + "\nWins ( Sumô ): " + p.getPvp().getWinssumo() + "\nWins no duelos (1v1): " + p.getPvp().getWinsx1() + "\nXP: " + p.getPvp().getXp() + "\nCoins: " + p.getPvp().getCoins() + "\nMortes no 1v1: " + p.getPvp().getDeathsx1() + "\nWinStreak no 1v1: " + p.getPvp().getWinstreakx1() + "\nCargo: " + giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() + "\nKills ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerKills(p.getUuid()) + "\nMortes ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerDeaths(p.getUuid()) + "\nWins ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerWins(p.getUuid()) + "\nCamas Destrúidas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerBedsDestroyed(p.getUuid()) + "\nPerdas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerLoses(p.getUuid()) + "\nPartidas Jogadas (BedWars): " + bedwarsAPI.getStatsUtil().getPlayerGamesPlayed(p.getUuid()) + "\nCoins: " + Eventos.econ.getBalance(real)).queue();
+if (!arg0.isAcknowledged()) {
+if (bedwarsAPI != null) {
+		   arg0.getChannel().sendMessage("**INFORMAÇÕES DE ESTATÍSTICAS DO JOGADOR **" + p.getName() + "\nKills ( KITPVP ): " + p.getPvp().getKills() + "\nMortes: " + p.getPvp().getDeaths() + "\nKillStreak atual ( KITPVP ): " + p.getPvp().getKillstreak() + "\nKills na FPS ( KITPVP ): " + p.getPvp().getKillsfps() + "\nWins ( Sumô ): " + p.getPvp().getWinssumo() + "\nWins no duelos (1v1): " + p.getPvp().getWinsx1() + "\nXP: " + p.getPvp().getXp() + "\nCoins (KITPVP): " + p.getPvp().getCoins() + "\nMortes no 1v1: " + p.getPvp().getDeathsx1() + "\nWinStreak no 1v1: " + p.getPvp().getWinstreakx1() + "\nCargo: " + giveMeADamnUser(real.getUniqueId()).getPrimaryGroup().toUpperCase().toString() + "\nKills ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerKills(p.getUuid()) + "\nMortes ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerDeaths(p.getUuid()) + "\nWins ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerWins(p.getUuid()) + "\nCamas Destrúidas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerBedsDestroyed(p.getUuid()) + "\nPerdas ( Bedwars ): " + bedwarsAPI.getStatsUtil().getPlayerLoses(p.getUuid()) + "\nPartidas Jogadas (BedWars): " + bedwarsAPI.getStatsUtil().getPlayerGamesPlayed(p.getUuid()) + "\nCoins (Global): " + Eventos.econ.getBalance(real) + "\nFragmentos (Rankup): " + PlaceholderAPI.setPlaceholders(real, "%yrankup_coin%")+ "\nSementes (Rankup): " + PlaceholderAPI.setPlaceholders(real, "§a%yplantacoes_moedas%")+ "\nRank (Rankup): " + PlaceholderAPI.setPlaceholders(real, "§a%yrankup_rank_name%") + "\nBlocos da mina (Rankup): " + PlaceholderAPI.setPlaceholders(real, "%yminas_blocos%") + "\nClã (Rankup): " + PlaceholderAPI.setPlaceholders(real, "§a%yclans_clan_name%") + "\nGold (Rankup): " + PlaceholderAPI.setPlaceholders(real, "%playerpoints_points%")).queue();
+}
+else {
+	arg0.getChannel().sendMessage("Erro ao carregar os dados do jogador!");
+		   }
 		   return true; 
 		   }
+			}
 			 }
 		   catch (NullPointerException e) {
 			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.").queue();
@@ -87,4 +96,7 @@ import net.wavemc.core.bukkit.account.WavePlayer;
 
 		    return userFuture.join(); 
 				}
+	
+	
+	
 	}

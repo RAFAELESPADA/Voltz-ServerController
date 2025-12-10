@@ -56,16 +56,20 @@ import net.milkbowl.vault.permission.Permission;
 
 	        final Vector sponge = p.getLocation().getDirection().multiply(3.8).setY(0.45);
 	    	Block block = p.getLocation().getBlock().getRelative(0, -1, 0);
+	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") != null) {
 	    	if (block.getType() == Material.SLIME_BLOCK && p.getWorld() == Bukkit.getWorld("spawn")) {
 	    		p.setVelocity(sponge);
 	    	    p.playEffect(loc, Effect.MOBSPAWNER_FLAMES, (Object)null);
 	    	}
 	    	}
+	    	}
 	    @EventHandler
 			public void onJoivn(WeatherChangeEvent e) {
 		    /*     */   
+	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") == null) {
 		    e.setCancelled(e.toWeatherState());
 		}
+	    }
 	    @EventHandler
 		public void onJoivn(PlayerMoveEvent e) {
 	    /*     */   
@@ -113,11 +117,13 @@ import net.milkbowl.vault.permission.Permission;
 		
 	    @EventHandler    
 	    public void onNodggg(BlockBreakEvent e) {
+
+	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") != null) {
 	    	if (!(e.getBlock().getType().toString().contains("_ORE") || e.getBlock().getType().toString().contains("STONE"))) {	
 	    	
 	    	return;
 	    	}
-	    	if (!(e.getPlayer().getWorld().equals(Bukkit.getWorld("mina")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina1")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina2")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina3")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina4")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minavip")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minapvp")))) {	
+	    	if (!(e.getPlayer().getWorld().equals(Bukkit.getWorld("mina")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina1")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina2")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minasuperioe")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina3")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina4")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minavip")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minapvp")))) {	
 	    		return;
 	    		}
 	    /*  46 */         Random rand = new Random();
@@ -150,6 +156,7 @@ import net.milkbowl.vault.permission.Permission;
 	    	e.getPlayer().sendMessage(ChatColor.YELLOW + "Você recebeu uma bomba larga");
 	    	}
 	    	}
+	    }
 	    public static ArmazemAPIHolder getArmazemAPI() {
 	    	  try {
 	    	      RegisteredServiceProvider<ArmazemAPIHolder> rsp = Bukkit.getServer().getServicesManager()
