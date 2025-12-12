@@ -52,7 +52,6 @@ public static void teleport(ProxiedPlayer from, ProxiedPlayer to) {
     if (from.getServer().getInfo() != to.getServer().getInfo())
       from.connect(to.getServer().getInfo()); 
     ScheduledTask schedule = ProxyServer.getInstance().getScheduler().schedule(Main.getInstance(), () -> BungeeSend.teleport(from, to), 1L, TimeUnit.SECONDS);
-   
   }
 
 public static String TeleportCorrectly() {
@@ -67,10 +66,12 @@ public static String TeleportCorrectly() {
 	}
 }
 catch (ClassNotFoundException | NoClassDefFoundError ext) {
-		return "btp ";
+		return "/btp ";
 	}
 }
 	
+
+
 }
 
   

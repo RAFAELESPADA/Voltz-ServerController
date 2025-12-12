@@ -103,7 +103,9 @@ if (PlayerGroup.getRoles().isEmpty()) {
 	if (!Eventos.setupEconomy()) {
 		Bukkit.getConsoleSender().sendMessage("COULD NOT SETUP ECONOMY");
     }
-    
+	Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+    Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "skyzermc:pm");
+    Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "skyzermc:pm", new BukkitPluginMessageListener());
 
 	if (Bukkit.getPluginManager().isPluginEnabled("BedWars1058") && Bukkit.getPluginManager().getPlugin("BedWars1058") != null) {
 	     // Spawn an invisible armor stand at the location
@@ -271,6 +273,7 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
 	    		   Bukkit.getConsoleSender().sendMessage("REMOVING ARMOR STANDS FROM LOBBY SERVER"); 
     		   }
+    	   }
 	    		   if (Bukkit.getWorld("spawnbw") == null) { 
     	   for (Entity e2 : Bukkit.getWorld("world").getEntities()) {
     		    	   if (e2 instanceof ArmorStand) {
@@ -283,7 +286,7 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
     	   }
     	   }
        }
-    	   }}
+    	   }
        
        
        
