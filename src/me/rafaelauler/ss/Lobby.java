@@ -48,7 +48,7 @@ new BukkitRunnable() {
     		p.teleport(l);
     	}
     	}
-    	if (p.getWorld().equals(Bukkit.getWorld("spawnbw"))) {
+    	else if (p.getWorld().equals(Bukkit.getWorld("spawnbw"))) {
     		Location l = new Location(Bukkit.getWorld("spawn"), 147.175, 68.000, -121.495);
     		l.setPitch((float)5.6);
     		l.setYaw((float)90.0);
@@ -66,13 +66,13 @@ new BukkitRunnable() {
             }}.runTaskLater(BukkitMain.plugin, 25l);
     		p.teleport(l);
     	}
-    	if (Bukkit.getPluginManager().getPlugin("LeafMito") != null) {
+    	else if (Bukkit.getPluginManager().getPlugin("LeafMito") != null) {
     		BungeeAPI.send(p, "lobby");
     	}
-    	if (p.getWorld().equals(Bukkit.getWorld("spawn"))) {
+    	else if (p.getWorld().equals(Bukkit.getWorld("spawn"))) {
     		p.sendMessage(ChatColor.RED + "Você já está no lobby principal!");
     	}
-    	if (!p.getWorld().equals(Bukkit.getWorld("spawn")) && !p.getWorld().equals(Bukkit.getWorld("spawnbw"))&& !p.getWorld().equals(Bukkit.getWorld("arena"))&& !p.getWorld().equals(Bukkit.getWorld("fps"))&& !p.getWorld().equals(Bukkit.getWorld("lava")) && !p.getWorld().equals(Bukkit.getWorld("1v1"))) {
+    	else if (!p.getWorld().equals(Bukkit.getWorld("spawn")) && !p.getWorld().equals(Bukkit.getWorld("spawnbw"))&& !p.getWorld().equals(Bukkit.getWorld("arena"))&& !p.getWorld().equals(Bukkit.getWorld("fps"))&& !p.getWorld().equals(Bukkit.getWorld("lava")) && !p.getWorld().equals(Bukkit.getWorld("1v1"))) {
     		p.sendMessage(ChatColor.RED + "Esse comando não existe.");
     	
     	}

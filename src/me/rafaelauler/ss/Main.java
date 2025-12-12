@@ -48,7 +48,7 @@ public class Main extends Plugin implements Listener {
 
 
 	        ProxyServer.getInstance().registerChannel(channel);
-
+	        getProxy().registerChannel("skyzermc:pm");
 	        loadCommands(getProxy().getPluginManager());
 instance = this;
 	            }

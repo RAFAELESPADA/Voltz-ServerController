@@ -2,8 +2,13 @@ package me.rafaelauler.ss;
 
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
 
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.AbstractReconnectHandler;
@@ -51,6 +56,38 @@ public class PlayerListener implements Listener {
           if (args.length == 3 && getSpace(e.getCursor()) == 2)
             addSuggestions(e, args); 
         }   
+  }
+  @EventHandler
+  public void onPluginMessage(PluginMessageEvent event) {
+      try {
+          if (!(event.getReceiver() instanceof ProxiedPlayer player)) {
+              return;
+          }
+
+          if (event.getTag().equals("skyzermc:pm")) {
+              event.setCancelled(true); // don't forward kindome:pm to player.
+
+              ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
+              String command = in.readUTF();
+              
+          }
+      } catch (Exception exception) {
+         exception.printStackTrace();
+      }
+  }
+  public static void pluginMessage(ProxiedPlayer player, String... messages) {
+      ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+      DataOutputStream output = new DataOutputStream(byteArray);
+      try {
+          for (String message : messages) {
+              output.writeUTF(message);
+          }
+      } catch (IOException exception) {
+          exception.printStackTrace();
+      }
+      if (player.getServer() != null) {
+          player.getServer().sendData("skyzermc:pm", byteArray.toByteArray());
+      }
   }
 
   @EventHandler(priority = 32)
