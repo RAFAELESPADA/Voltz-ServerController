@@ -56,7 +56,7 @@ import net.milkbowl.vault.permission.Permission;
 
 	        final Vector sponge = p.getLocation().getDirection().multiply(3.8).setY(0.45);
 	    	Block block = p.getLocation().getBlock().getRelative(0, -1, 0);
-	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") != null) {
+	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") == null) {
 	    	if (block.getType() == Material.SLIME_BLOCK && p.getWorld() == Bukkit.getWorld("spawn")) {
 	    		p.setVelocity(sponge);
 	    	    p.playEffect(loc, Effect.MOBSPAWNER_FLAMES, (Object)null);

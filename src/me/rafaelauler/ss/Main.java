@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import com.google.common.io.ByteStreams;
 
 import lombok.SneakyThrows;
+import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
@@ -71,7 +72,9 @@ instance = this;
 			      if (!player.hasPermission("utils.staffchat.use") || 
 			        player == null)
 			        continue; 
-			      player.sendMessage((BaseComponent)new TextComponent("§6[StaffChat] §7" + p.getName() + "§d: §f" +  message));
+
+			    	LuckPerms api2 = LuckPermsProvider.get();	
+			      player.sendMessage((BaseComponent)new TextComponent("§6[StaffChat] §7" + api2.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getPrefix().replace("&", "§") + p.getName() + "§d: §f" +  message));
 			      } 
 			  }
 
@@ -80,7 +83,9 @@ instance = this;
 			      if (!player.hasPermission("tag.admin") || 
 			        player == null)
 			        continue; 
-			      player.sendMessage((BaseComponent)new TextComponent("§3[AdminChat] §7" + p.getName() + "§d: §f" +  message));
+
+			    	LuckPerms api2 = LuckPermsProvider.get();
+			      player.sendMessage((BaseComponent)new TextComponent("§3[AdminChat] §7" + api2.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getPrefix().replace("&", "§") + p.getName() + "§d: §f" +  message));
 			      } 
 			  }
 
@@ -95,7 +100,8 @@ instance = this;
 		        if (!player.hasPermission("tag.admin") || 
 		          player == null)
 		          continue; 
-		        player.sendMessage((BaseComponent)new TextComponent("§3[AdminChat] §7" + p.getName() + "§d: §f" +  e.getMessage()));
+		    	LuckPerms api2 = LuckPermsProvider.get();	  	 
+		        player.sendMessage((BaseComponent)new TextComponent("§3[AdminChat] §7" + api2.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getPrefix().replace("&", "§") + p.getName() + "§d: §f" +  e.getMessage()));
 		      } 
 		      e.setCancelled(true);
 		    } 
@@ -110,7 +116,9 @@ instance = this;
 		        if (!player.hasPermission("utils.staffchat.use") || 
 		          player == null)
 		          continue; 
-		        player.sendMessage((BaseComponent)new TextComponent("§6[StaffChat] §7" + p.getName() + "§d: §f" +  e.getMessage()));
+
+		    	LuckPerms api2 = LuckPermsProvider.get();	
+		        player.sendMessage((BaseComponent)new TextComponent("§6[StaffChat] §7" + api2.getUserManager().getUser(p.getUniqueId()).getCachedData().getMetaData().getPrefix().replace("&", "§") + p.getName() + "§d: §f" +  e.getMessage()));
 		      } 
 		      e.setCancelled(true);
 		    } 
