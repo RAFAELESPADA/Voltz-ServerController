@@ -16,7 +16,6 @@ public class StaffChat extends Command {
   public StaffChat(Plugin plugin) {
     super("sc", null, new String[] { "staffchat" });
   }
-  
   public void execute(CommandSender sender, String[] args) {
     ProxiedPlayer p = (ProxiedPlayer)sender;
     if (!sender.hasPermission("utils.staffchat.use")) {

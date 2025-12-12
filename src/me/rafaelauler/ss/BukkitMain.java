@@ -53,7 +53,7 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-    public final String TOKEN = "NULO";
+    public final String TOKEN = "NULL";
 
 
     private int rotate = 0, dropID = 0;
@@ -111,10 +111,15 @@ if (PlayerGroup.getRoles().isEmpty()) {
 	ArmorStand armorStand2;
 	ArmorStand armorStand3;
 	ArmorStand armorStand4;
+
+	ArmorStand armorStand5;
+	ArmorStand armorStand6;
     armorStand = (ArmorStand) Bukkit.getWorld("spawnbw").spawnEntity(new Location(Bukkit.getWorld("spawnbw"), 22.547, 71.45989, 9.654), EntityType.ARMOR_STAND);
     armorStand2 = (ArmorStand) Bukkit.getWorld("spawnbw").spawnEntity(new Location(Bukkit.getWorld("spawnbw"), 22.547, 71.45989, -17.499), EntityType.ARMOR_STAND);
     armorStand3 = (ArmorStand) Bukkit.getWorld("spawn").spawnEntity(new Location(Bukkit.getWorld("spawn"), 125.459, 70.5415, -115.5150), EntityType.ARMOR_STAND);
     armorStand4 = (ArmorStand) Bukkit.getWorld("spawn").spawnEntity(new Location(Bukkit.getWorld("spawn"), 125.459, 70.5415, -128.125), EntityType.ARMOR_STAND);
+    armorStand5 = (ArmorStand) Bukkit.getWorld("arena").spawnEntity(new Location(Bukkit.getWorld("arena"), -144.592, 147.77076, 67.345), EntityType.ARMOR_STAND);
+    armorStand6 = (ArmorStand) Bukkit.getWorld("arena").spawnEntity(new Location(Bukkit.getWorld("arena"), -157.346, 147.90449, 69.974), EntityType.ARMOR_STAND);
 
 	     armorStand.setVisible(false);
 	     armorStand.setGravity(false);
@@ -130,6 +135,14 @@ if (PlayerGroup.getRoles().isEmpty()) {
 	     armorStand4.setVisible(false);
 	     armorStand4.setGravity(false);
 	     armorStand4.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
+	  // Run this task repeatedly every game tick (20 ticks per second)
+	     armorStand5.setVisible(false);
+	     armorStand5.setGravity(false);
+	     armorStand5.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
+	  // Run this task repeatedly every game tick (20 ticks per second)
+	     armorStand6.setVisible(false);
+	     armorStand6.setGravity(false);
+	     armorStand6.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
 	  // Run this task repeatedly every game tick (20 ticks per second)
 
 	  	Bukkit.getConsoleSender().sendMessage("(spawning bw animated armor stands)");
@@ -155,6 +168,9 @@ if (PlayerGroup.getRoles().isEmpty()) {
 
                 armorStand3.setHeadPose(new EulerAngle(0, y, 0));
                 armorStand4.setHeadPose(new EulerAngle(0, y, 0));
+
+                armorStand5.setHeadPose(new EulerAngle(0, y, 0));
+                armorStand6.setHeadPose(new EulerAngle(0, y, 0));
             }
         }.runTaskTimer(BukkitMain.plugin, 1, 1);
 	
@@ -251,17 +267,23 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
     	    		   if (e3 != null) {
     	    		   e3.remove();
     	    		   }
-    	   } else { 
+    	   }
+
+	    		   Bukkit.getConsoleSender().sendMessage("REMOVING ARMOR STANDS FROM LOBBY SERVER"); 
+    		   }
+	    		   if (Bukkit.getWorld("spawnbw") == null) { 
     	   for (Entity e2 : Bukkit.getWorld("world").getEntities()) {
     		    	   if (e2 instanceof ArmorStand) {
     		    		   if (e2 != null) {
     		    		   e.remove();
     		    		   }		   
     		    	   }
+
+    	    		   Bukkit.getConsoleSender().sendMessage("REMOVING ARMOR STANDS FROM RANKUP SERVER");
     	   }
     	   }
        }
-    	   }}}
+    	   }}
        
        
        

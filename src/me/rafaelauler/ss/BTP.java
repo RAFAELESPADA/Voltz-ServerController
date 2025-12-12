@@ -56,14 +56,21 @@ public static void teleport(ProxiedPlayer from, ProxiedPlayer to) {
   }
 
 public static String TeleportCorrectly() {
+	try {
+		Class.forName("org.bukkit.command.CommandExecutor");
+		
 	if (BukkitMain.plugin != null) {
-		return "tp ";
+		return "/tp ";
 	}
 	else {
+		return "/btp ";
+	}
+}
+catch (ClassNotFoundException | NoClassDefFoundError ext) {
 		return "btp ";
 	}
 }
-
+	
 }
 
   
