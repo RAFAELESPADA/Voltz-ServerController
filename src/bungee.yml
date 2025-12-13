@@ -1,6 +1,0 @@
-name: ServerController
-main: me.rafaelauler.ss.Main
-version: 1.0.0
-author: Rafael Auler
-description: skyzermc.com.br
-softDepends: [LuckPerms]
