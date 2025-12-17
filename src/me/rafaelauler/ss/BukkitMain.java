@@ -258,6 +258,18 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
         Bukkit.getConsoleSender().sendMessage("[TELEPORT] PLUGIN DESLIGADO COM SUCESSO");
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
         this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
+
+        if (Bukkit.getWorld("world") != null) {
+  	   for (Entity e3 : Bukkit.getWorld("world").getEntities()) {
+	    	   if (e3 instanceof ArmorStand) {
+	    		   if (e3 != null) {
+	    		   e3.remove();
+	    		   }		   
+
+ 		   Bukkit.getConsoleSender().sendMessage("REMOVING ARMOR STANDS FROM RANKUP SERVER");
+}
+  	   }
+        }
         if (Bukkit.getWorld("spawnbw") != null) {
        for (Entity e: Bukkit.getWorld("spawnbw").getEntities()) {
     	   if (e instanceof ArmorStand) {
@@ -273,20 +285,11 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
 	    		   Bukkit.getConsoleSender().sendMessage("REMOVING ARMOR STANDS FROM LOBBY SERVER"); 
     		   }
-    	   }
-	    		   if (Bukkit.getWorld("spawnbw") == null) { 
-    	   for (Entity e2 : Bukkit.getWorld("world").getEntities()) {
-    		    	   if (e2 instanceof ArmorStand) {
-    		    		   if (e2 != null) {
-    		    		   e.remove();
-    		    		   }		   
-    		    	   }
-
-    	    		   Bukkit.getConsoleSender().sendMessage("REMOVING ARMOR STANDS FROM RANKUP SERVER");
-    	   }
+    	  
     	   }
        }
-    	   }
+       }
+    	   
        
        
        

@@ -2,17 +2,10 @@ package me.rafaelauler.ss;
 
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.Random;
-import java.util.logging.Level;
-
-import com.google.common.io.ByteStreams;
 
 import lombok.SneakyThrows;
 import net.luckperms.api.LuckPerms;
@@ -29,8 +22,6 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.config.Configuration;
-import net.md_5.bungee.config.ConfigurationProvider;
-import net.md_5.bungee.config.YamlConfiguration;
 import net.md_5.bungee.event.EventHandler;
 
 public class Main extends Plugin implements Listener {
@@ -60,13 +51,7 @@ instance = this;
 		    this.config = null;
 		  }
 		  
-		  public void loadConfig() {
-		    try {
-		      this.config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(loadResource("config.yml"));
-		    } catch (IOException e) {
-		      getLogger().log(Level.SEVERE, "Exception while reading config", e);
-		    } 
-		  }
+		  
 		  public void scMandarMsg(ProxiedPlayer p, String message) {
 			    for (ProxiedPlayer player : getProxy().getPlayers()) {
 			      if (!player.hasPermission("utils.staffchat.use") || 
@@ -124,24 +109,7 @@ instance = this;
 		    } 
 		  }
 
-		  public File loadResource(String resource) {
-		    File folder = getDataFolder();
-		    if (!folder.exists())
-		      folder.mkdir(); 
-		    File resourceFile = new File(folder, resource);
-		    try {
-		      if (!resourceFile.exists()) {
-		        resourceFile.createNewFile();
-		        try(InputStream in = getResourceAsStream(resource); 
-		            OutputStream out = new FileOutputStream(resourceFile)) {
-		          ByteStreams.copy(in, out);
-		        } 
-		      } 
-		    } catch (Exception e) {
-		      getLogger().log(Level.SEVERE, "Exception while writing default config", e);
-		    } 
-		    return resourceFile;
-		  }
+		
 		  
 		  public Configuration getConfig() {
 		    return this.config;

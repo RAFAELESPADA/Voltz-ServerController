@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -27,6 +28,7 @@ import org.bukkit.util.Vector;
 
 import br.com.ystoreplugins.product.yarmazem.ArmazemAPIHolder;
 import br.com.ystoreplugins.product.yspawnersv2.SpawnerV2APIHolder;
+import me.RockinChaos.itemjoin.api.ItemJoinAPI;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.node.NodeAddEvent;
@@ -175,6 +177,39 @@ import net.milkbowl.vault.permission.Permission;
 	    	      return null;
 	    	  }
 	    	}
+   	
+    @EventHandler
+	public void otnShot(PlayerDeathEvent e) {
+    	if (Bukkit.getWorld("spawn") == null) {
+    		return;
+    	}
+		if (e.getEntity().getWorld().equals(Bukkit.getWorld("spawn"))) {
+			Location l = new Location(Bukkit.getWorld("spawn"), 147.175, 68.000, -121.495);
+    		l.setPitch((float)5.6);
+    		l.setYaw((float)90.0);
+            new BukkitRunnable() {
+                
+                public void run() {
+                    e.getEntity().getInventory().clear();
+            }}.runTaskLater(BukkitMain.plugin, 10l);
+                
+            ItemJoinAPI itemAPI = new ItemJoinAPI();
+new BukkitRunnable() {
+                
+                public void run() {
+                   itemAPI.getItems(e.getEntity());
+            }}.runTaskLater(BukkitMain.plugin, 25l);
+
+        	e.getEntity().spigot().respawn();
+            e.getEntity().teleport(l);
+            e.getEntity().sendMessage(ChatColor.GREEN + "Você retornou ao lobby principal!");
+    	}
+		
+	
+    }
+    
+	
+	
 	    @EventHandler
 		public void otnShot(EntityDamageByEntityEvent e) {
 			
