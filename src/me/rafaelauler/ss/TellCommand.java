@@ -72,6 +72,14 @@ public class TellCommand extends Command {
     	sender.sendMessage(TextComponent.fromLegacyText("§c" + targetPlayer.getName() + " desativou o recebimento de mensagens privadas"));
         return;
     }
+    PlayerTellEvent event = new PlayerTellEvent(message);
+    ProxyServer.getInstance().getPluginManager().callEvent(event);
+
+            if(event.isCancelled()){
+            	sender.sendMessage(TextComponent.fromLegacyText("§cSeu acesso ao recurso de mensagens privadas está restrito por causa de punições ativas em sua conta"));
+                return;
+            }
+
     targetPlayer.sendMessage(TextComponent.fromLegacyText("§c§lTELL RECEBIDO §7" + player.getName() + ": §f" + message));
     sender.sendMessage(TextComponent.fromLegacyText("§c§lTELL ENVIADO §7" + targetPlayer.getName() + ": §f" + message));
    lastMessageMap.put(player, targetPlayer);

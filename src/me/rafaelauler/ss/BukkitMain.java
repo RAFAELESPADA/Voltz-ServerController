@@ -53,7 +53,7 @@ public class BukkitMain extends JavaPlugin implements PluginMessageListener, Lis
     private LuckPerms luckPerms;
 
     boolean up = true;
-    public final String TOKEN = "NULO";
+    public final String TOKEN = "nulo";
 
 
     private int rotate = 0, dropID = 0;
@@ -113,6 +113,12 @@ if (PlayerGroup.getRoles().isEmpty()) {
 	ArmorStand armorStand6;
 	ArmorStand armorStand7;
 	ArmorStand armorStand8;
+
+	ArmorStand armorStand9;
+	ArmorStand armorStand10;
+	ArmorStand armorStand11;
+
+	ArmorStand armorStand12;
 	if (Bukkit.getWorld("arena") != null) {
     armorStand3 = (ArmorStand) Bukkit.getWorld("spawn").spawnEntity(new Location(Bukkit.getWorld("spawn"), 125.459, 70.5415, -115.5150), EntityType.ARMOR_STAND);
     armorStand4 = (ArmorStand) Bukkit.getWorld("spawn").spawnEntity(new Location(Bukkit.getWorld("spawn"), 125.459, 70.5415, -128.125), EntityType.ARMOR_STAND);
@@ -120,16 +126,29 @@ if (PlayerGroup.getRoles().isEmpty()) {
     armorStand6 = (ArmorStand) Bukkit.getWorld("arena").spawnEntity(new Location(Bukkit.getWorld("arena"), -157.346, 147.90449, 69.974), EntityType.ARMOR_STAND);	     armorStand3.setVisible(false);
     armorStand7 = (ArmorStand) Bukkit.getWorld("torneio").spawnEntity(new Location(Bukkit.getWorld("torneio"), -55.592, 121.77076, 61.345), EntityType.ARMOR_STAND);
     armorStand8 = (ArmorStand) Bukkit.getWorld("torneio").spawnEntity(new Location(Bukkit.getWorld("torneio"), -53, 120, -63), EntityType.ARMOR_STAND);	    
+    armorStand9 = (ArmorStand) Bukkit.getWorld("swlobby").spawnEntity(new Location(Bukkit.getWorld("swlobby"), -16, 97, -15), EntityType.ARMOR_STAND);
+    armorStand10 = (ArmorStand) Bukkit.getWorld("spawnbw").spawnEntity(new Location(Bukkit.getWorld("spawnbw"), 22, 72, -18), EntityType.ARMOR_STAND);	    
+    armorStand11 = (ArmorStand) Bukkit.getWorld("spawnbw").spawnEntity(new Location(Bukkit.getWorld("spawnbw"), 22, 72, 9), EntityType.ARMOR_STAND);
+    armorStand12 = (ArmorStand) Bukkit.getWorld("spawn").spawnEntity(new Location(Bukkit.getWorld("spawn"), 147, 70, -127), EntityType.ARMOR_STAND);
+    
     armorStand3.setVisible(false);
 	
 	     armorStand3.setGravity(false);
 	     armorStand3.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));
-
+	     armorStand9.setGravity(false);
+	     armorStand9.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));
+	     armorStand10.setGravity(false);
+	     armorStand10.setVisible(false);
+	     armorStand10.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));
+	     armorStand12.setGravity(false);
+	     armorStand12.getEquipment().setHelmet(new ItemStack(Material.JUKEBOX));
+	     armorStand12.setVisible(false);
 	     armorStand4.setVisible(false);
 	     armorStand4.setGravity(false);
 	     armorStand4.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
 	  // Run this task repeatedly every game tick (20 ticks per second)
 	     armorStand5.setVisible(false);
+	     armorStand12.setVisible(false);
 	     armorStand5.setGravity(false);
 	     armorStand5.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
 	  // Run this task repeatedly every game tick (20 ticks per second)
@@ -143,7 +162,9 @@ if (PlayerGroup.getRoles().isEmpty()) {
 	     armorStand8.setVisible(false);
 	     armorStand8.setGravity(false);
 	     armorStand8.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
-	 
+	     armorStand11.setVisible(false);
+	     armorStand11.setGravity(false);
+	     armorStand11.getEquipment().setHelmet(new ItemStack(Material.EMERALD_BLOCK));// Place the item in its "hand"
 	  	Bukkit.getConsoleSender().sendMessage("(spawning kitpvp/lobby animated armor stands)");
 	  	new BukkitRunnable() {
 
@@ -170,6 +191,13 @@ if (PlayerGroup.getRoles().isEmpty()) {
 
                 armorStand5.setHeadPose(new EulerAngle(0, y, 0));
                 armorStand6.setHeadPose(new EulerAngle(0, y, 0));
+
+                armorStand9.setHeadPose(new EulerAngle(0, y, 0));
+
+                armorStand11.setHeadPose(new EulerAngle(0, y, 0));
+
+                armorStand12.setHeadPose(new EulerAngle(0, y, 0));
+                armorStand10.setHeadPose(new EulerAngle(0, y, 0));
             }
         }.runTaskTimer(BukkitMain.plugin, 1, 1);
 	}
@@ -279,20 +307,32 @@ this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
     	    		   if (e3 != null) {
     	    		   e3.remove();
     	    		   }
-    	   }
+    	   
     	    	   for (Entity e5 : Bukkit.getWorld("arena").getEntities()) {
         	    	   if (e5 instanceof ArmorStand) {
         	    		   if (e5 != null) {
         	    		   e5.remove();
         	    		   }
-        	   }
+        	    		   for (Entity e5g : Bukkit.getWorld("spawnbw").getEntities()) {
+                	    	   if (e5g instanceof ArmorStand) {
+                	    		   if (e5g != null) {
+                	    		   e5g.remove();
+                	    		   }
+                	   
+        	   
+        	    	   for (Entity ef5 : Bukkit.getWorld("swlobby").getEntities()) {
+            	    	   if (ef5 instanceof ArmorStand) {
+            	    		   if (ef5 != null) {
+            	    		   ef5.remove();
+            	    		   }
+            	   
 
 	    		   Bukkit.getConsoleSender().sendMessage("REMOVING ARMOR STANDS FROM LOBBY SERVER"); 
     		   }
     	  
     	   }
        }
-       }}
+       }}}}}}}}
     	   
        
        

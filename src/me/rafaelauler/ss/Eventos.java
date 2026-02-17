@@ -18,6 +18,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -177,7 +178,32 @@ import net.milkbowl.vault.permission.Permission;
 	    	      return null;
 	    	  }
 	    	}
-   	
+	    @EventHandler
+		public void otnShot(PlayerChangedWorldEvent e) {
+	    	if (Bukkit.getWorld("spawn") == null) {
+	    		return;
+	    	}
+	    	Player p = e.getPlayer()
+	    			;	    	if (e.getFrom() == Bukkit.getWorld("wool1") || e.getFrom() == Bukkit.getWorld("wool2")) {
+	    		Location l = new Location(Bukkit.getWorld("spawn"), 147.175, 68.000, -121.495);
+	    		l.setPitch((float)5.6);
+	    		l.setYaw((float)90.0);
+	            new BukkitRunnable() {
+	                
+	                public void run() {
+	                    p.getInventory().clear();
+	            }}.runTaskLater(BukkitMain.plugin, 10l);
+	                
+	            ItemJoinAPI itemAPI = new ItemJoinAPI();
+	new BukkitRunnable() {
+	                
+	                public void run() {
+	                   itemAPI.getItems(p);
+	            }}.runTaskLater(BukkitMain.plugin, 25l);
+	    		p.teleport(l);
+	    	}
+	    	}
+	    
     @EventHandler
 	public void otnShot(PlayerDeathEvent e) {
     	if (Bukkit.getWorld("spawn") == null) {
