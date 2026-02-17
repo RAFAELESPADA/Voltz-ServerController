@@ -72,7 +72,7 @@ public class TellCommand extends Command {
     	sender.sendMessage(TextComponent.fromLegacyText("§c" + targetPlayer.getName() + " desativou o recebimento de mensagens privadas"));
         return;
     }
-    PlayerTellEvent event = new PlayerTellEvent(message);
+    PlayerTellEvent event = new PlayerTellEvent(message, player);
     ProxyServer.getInstance().getPluginManager().callEvent(event);
 
             if(event.isCancelled()){
