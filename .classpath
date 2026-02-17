@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-18">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -21,8 +21,10 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/PAPIProxyBridge-Bukkit-1.8.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/KP-PVP-v1.8-1.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/ItemJoin.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/bedwars-plugin-25.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/KP-CORE-v4.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC/LOBBY/plugins/TAB v5.2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SPRINTMC BACKUP/PVP-KP/plugins/KP-CORE-v4.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SPRINTMC BACKUP/PVP-KP/plugins/TAB v5.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SPRINTMC BACKUP/PVP-KP/plugins/WorldEdit.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SPRINTMC BACKUP/PVP-KP/plugins/WorldGuard.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC BACKUP GERAL/LOBBY/plugins/AulerSkywars.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

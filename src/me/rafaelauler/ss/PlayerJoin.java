@@ -63,7 +63,8 @@ public class PlayerJoin implements Listener {
 	                public void run() {
 	                    player.getInventory().clear();
 	            }}.runTaskLater(BukkitMain.plugin, 10l);
-	                
+
+				if (Bukkit.getPluginManager().getPlugin("ItemJoin") != null) {
 	            ItemJoinAPI itemAPI = new ItemJoinAPI();
 	new BukkitRunnable() {
 	                
@@ -79,7 +80,7 @@ public class PlayerJoin implements Listener {
 	        	    		player.sendMessage(ChatColor.AQUA + "DICA: Utilize /tag <Tag> para alterar sua tag");
 	        	    		}
 	                   itemAPI.getItems(player);
-	            }}.runTaskLater(BukkitMain.plugin, 25l);
+	                 }}.runTaskLater(BukkitMain.plugin, 25l);
 new BukkitRunnable() {
 	                
 	                public void run() {		
@@ -95,6 +96,7 @@ new BukkitRunnable() {
 		if (!player.hasPermission("*")) {
 		player.setOp(false);
 	}
+			}
 		}
 
 public static void throwRandomFirework(Player p) {

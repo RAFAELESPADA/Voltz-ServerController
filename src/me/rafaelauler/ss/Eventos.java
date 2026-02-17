@@ -17,6 +17,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -27,6 +29,7 @@ import org.bukkit.util.Vector;
 
 import br.com.ystoreplugins.product.yarmazem.ArmazemAPIHolder;
 import br.com.ystoreplugins.product.yspawnersv2.SpawnerV2APIHolder;
+import me.RockinChaos.itemjoin.api.ItemJoinAPI;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.node.NodeAddEvent;
@@ -56,16 +59,20 @@ import net.milkbowl.vault.permission.Permission;
 
 	        final Vector sponge = p.getLocation().getDirection().multiply(3.8).setY(0.45);
 	    	Block block = p.getLocation().getBlock().getRelative(0, -1, 0);
+	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") == null) {
 	    	if (block.getType() == Material.SLIME_BLOCK && p.getWorld() == Bukkit.getWorld("spawn")) {
 	    		p.setVelocity(sponge);
 	    	    p.playEffect(loc, Effect.MOBSPAWNER_FLAMES, (Object)null);
 	    	}
 	    	}
+	    	}
 	    @EventHandler
 			public void onJoivn(WeatherChangeEvent e) {
 		    /*     */   
+	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") == null) {
 		    e.setCancelled(e.toWeatherState());
 		}
+	    }
 	    @EventHandler
 		public void onJoivn(PlayerMoveEvent e) {
 	    /*     */   
@@ -113,11 +120,13 @@ import net.milkbowl.vault.permission.Permission;
 		
 	    @EventHandler    
 	    public void onNodggg(BlockBreakEvent e) {
+
+	    	if (Bukkit.getPluginManager().getPlugin("LeafMito") != null) {
 	    	if (!(e.getBlock().getType().toString().contains("_ORE") || e.getBlock().getType().toString().contains("STONE"))) {	
 	    	
 	    	return;
 	    	}
-	    	if (!(e.getPlayer().getWorld().equals(Bukkit.getWorld("mina")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina1")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina2")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina3")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina4")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minavip")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minapvp")))) {	
+	    	if (!(e.getPlayer().getWorld().equals(Bukkit.getWorld("mina")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina1")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina2")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minasuperioe")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina3")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("mina4")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minavip")) || e.getPlayer().getWorld().equals(Bukkit.getWorld("minapvp")))) {	
 	    		return;
 	    		}
 	    /*  46 */         Random rand = new Random();
@@ -150,6 +159,7 @@ import net.milkbowl.vault.permission.Permission;
 	    	e.getPlayer().sendMessage(ChatColor.YELLOW + "Você recebeu uma bomba larga");
 	    	}
 	    	}
+	    }
 	    public static ArmazemAPIHolder getArmazemAPI() {
 	    	  try {
 	    	      RegisteredServiceProvider<ArmazemAPIHolder> rsp = Bukkit.getServer().getServicesManager()
@@ -168,6 +178,64 @@ import net.milkbowl.vault.permission.Permission;
 	    	      return null;
 	    	  }
 	    	}
+	    @EventHandler
+		public void otnShot(PlayerChangedWorldEvent e) {
+	    	if (Bukkit.getWorld("spawn") == null) {
+	    		return;
+	    	}
+	    	Player p = e.getPlayer()
+	    			;	    	if (e.getFrom() == Bukkit.getWorld("wool1") || e.getFrom() == Bukkit.getWorld("wool2")) {
+	    		Location l = new Location(Bukkit.getWorld("spawn"), 147.175, 68.000, -121.495);
+	    		l.setPitch((float)5.6);
+	    		l.setYaw((float)90.0);
+	            new BukkitRunnable() {
+	                
+	                public void run() {
+	                    p.getInventory().clear();
+	            }}.runTaskLater(BukkitMain.plugin, 10l);
+	                
+	            ItemJoinAPI itemAPI = new ItemJoinAPI();
+	new BukkitRunnable() {
+	                
+	                public void run() {
+	                   itemAPI.getItems(p);
+	            }}.runTaskLater(BukkitMain.plugin, 25l);
+	    		p.teleport(l);
+	    	}
+	    	}
+	    
+    @EventHandler
+	public void otnShot(PlayerDeathEvent e) {
+    	if (Bukkit.getWorld("spawn") == null) {
+    		return;
+    	}
+		if (e.getEntity().getWorld().equals(Bukkit.getWorld("spawn"))) {
+			Location l = new Location(Bukkit.getWorld("spawn"), 147.175, 68.000, -121.495);
+    		l.setPitch((float)5.6);
+    		l.setYaw((float)90.0);
+            new BukkitRunnable() {
+                
+                public void run() {
+                    e.getEntity().getInventory().clear();
+            }}.runTaskLater(BukkitMain.plugin, 10l);
+                
+            ItemJoinAPI itemAPI = new ItemJoinAPI();
+new BukkitRunnable() {
+                
+                public void run() {
+                   itemAPI.getItems(e.getEntity());
+            }}.runTaskLater(BukkitMain.plugin, 25l);
+
+        	e.getEntity().spigot().respawn();
+            e.getEntity().teleport(l);
+            e.getEntity().sendMessage(ChatColor.GREEN + "Você retornou ao lobby principal!");
+    	}
+		
+	
+    }
+    
+	
+	
 	    @EventHandler
 		public void otnShot(EntityDamageByEntityEvent e) {
 			

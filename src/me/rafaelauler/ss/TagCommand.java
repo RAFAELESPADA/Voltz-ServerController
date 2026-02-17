@@ -36,7 +36,13 @@ public class TagCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             return true;
         }
-        
+        if (Bukkit.getPluginManager().getPlugin("LeafMito") != null) {
+        	
+             if (args.length == 0) {
+                 sender.sendMessage("§cPara escolher uma tag padrão use /tag <Tag>, para escolher uma especial use o menu");
+                 Bukkit.dispatchCommand(sender, "ytags:tag");
+        }
+        }
         if (Bukkit.getPluginManager().isPluginEnabled("TAB")) {
        SortingManager S =  TabAPI.getInstance().getSortingManager();
         }
@@ -130,9 +136,9 @@ try {
 }
 
      
+
+        
 		return false;
-
-        }
     
-
+    }
 }

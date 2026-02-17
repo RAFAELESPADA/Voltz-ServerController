@@ -52,17 +52,25 @@ public static void teleport(ProxiedPlayer from, ProxiedPlayer to) {
     if (from.getServer().getInfo() != to.getServer().getInfo())
       from.connect(to.getServer().getInfo()); 
     ScheduledTask schedule = ProxyServer.getInstance().getScheduler().schedule(Main.getInstance(), () -> BungeeSend.teleport(from, to), 1L, TimeUnit.SECONDS);
-   
   }
 
 public static String TeleportCorrectly() {
+	try {
+		Class.forName("org.bukkit.command.CommandExecutor");
+		
 	if (BukkitMain.plugin != null) {
-		return "tp ";
+		return "/tp ";
 	}
 	else {
-		return "btp ";
+		return "/btp ";
 	}
 }
+catch (ClassNotFoundException | NoClassDefFoundError ext) {
+		return "/btp ";
+	}
+}
+	
+
 
 }
 

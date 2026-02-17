@@ -21,7 +21,7 @@ public class ReloadCommand extends Command {
   }
     switch (args[0]) {
       case "reload":
-        this.plugin.loadConfig();
+    	  
         break;
     } 
   }
