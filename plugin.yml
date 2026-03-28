@@ -1,0 +1,41 @@
+name: ServerController
+author: Rafael Auler
+main: me.rafaelauler.ss.BukkitMain
+description: skyzermc.com.br
+version: 2.0
+loadbefore: [KPCore]
+depend: [ProtocolLib]
+softdepend: [AuraSkills, yPlugins]
+commands:
+  set-prefix:
+  pickencantar:
+  creport:
+  modo:
+  sudo:
+  consolesudo:
+  manutencao:
+  ctag:
+  dano:
+  grupo:
+  tempogrupo:
+  jogarbw:
+  lobby:
+  gorankup:
+  tag:
+  build:
+  perfil:
+  givegun:
+  prefixo:
+  jogarsw:
+  cargo:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,94 @@
+package me.rafaelauler.ss;
+
+
+
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.plugin.RegisteredServiceProvider;
+import org.jetbrains.annotations.NotNull;
+
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import br.com.ystoreplugins.lib.jda.net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.model.user.UserManager;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
+import net.wavemc.core.bukkit.WaveBukkit;
+import net.wavemc.core.bukkit.account.WavePlayer;
+
+
+	public class BedwarsEvents extends ListenerAdapter {
+	    private final BukkitMain plugin;
+	    private final LuckPerms luckPerms;
+	    public static Economy econ = null;
+	    public static Permission perms = null;
+	    public BedwarsEvents(BukkitMain plugin, LuckPerms luckPerms) {
+	        this.plugin = plugin;
+	        this.luckPerms = luckPerms;
+	    }
+	
+	    public void onSlashCommandInteraction(SlashCommandInteractionEvent arg0)
+	    {
+	        // Only accept commands from guilds
+	        if (arg0.getGuild() == null)
+	            return;
+	        switch (arg0.getName())
+	        {
+	        
+	        case "perfil":
+	          	 try {
+	               aa(arg0, arg0.getOption("nick").getAsString()); // content is required so no null-check here
+	               break;
+	          	 }
+	          	 catch (Exception e) {
+	          	 	e.printStackTrace();
+	          	 }
+	        }
+	    }
+		protected boolean aa(@NotNull SlashCommandInteractionEvent arg0 , String nick) {
+			 try {
+			 if (WaveBukkit.getPlayerManager().getPlayer(nick) == null) {
+				   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.").queue();
+				   return true;
+			   }
+		   WavePlayer p = WaveBukkit.getPlayerManager().getPlayer(nick);
+		  
+	       RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+			if (provider != null) {
+	OfflinePlayer real = Bukkit.getOfflinePlayer(nick);
+			    LuckPerms api = provider.getProvider();
+				
+		  
+if (!arg0.isAcknowledged()) {
+		   arg0.getChannel().sendMessage("COMANDO EM MAUTENÇÃO").queue();
+} else {
+	arg0.getChannel().sendMessage("Erro ao carregar os dados do jogador!");
+		   }
+		   return true; 
+		   }
+			
+			 }
+		   catch (NullPointerException e) {
+			   arg0.reply("Esse jogador não está cadastrado no nosso banco de dados.").queue();
+			   }
+		
+	
+			return false;
+		}
+		public User giveMeADamnUser(UUID uniqueId) {
+			 RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+				if (provider == null) return null; 
+				    LuckPerms api = provider.getProvider();
+		    UserManager userManager = api.getUserManager();
+		    CompletableFuture<User> userFuture = userManager.loadUser(uniqueId);
+
+		    return userFuture.join(); 
+				}
+	
+	
+	
+	}
