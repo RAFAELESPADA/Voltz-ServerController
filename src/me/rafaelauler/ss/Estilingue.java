@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,49 +31,50 @@ private HashMap<Player, Integer> jumped = new HashMap();
 
 @EventHandler
 public void interact(PlayerInteractEvent event) {
-	Player p = event.getPlayer();
-    if (p.getItemInHand().getType() == Material.MAGMA_CREAM && (p.getItemInHand().hasItemMeta())) {
-    	if (p.getItemInHand().getItemMeta().getDisplayName().equals("§eEstilingue"))
-		event.setCancelled(true);
-    	if (Bukkit.getPluginManager().getPlugin("BedWars1058") == null) {
-    		return;
-    	}
-    	else if ((!this.cos.contains(p)) && (!this.jumped.containsKey(p))) {
-			if (!p.isSneaking()) {
-				if (!(p.isOnGround())) {
-					this.jumped.put(p, Integer.valueOf(1));
+    Player p = event.getPlayer();
+    ItemStack item = p.getItemInHand();
 
-/*  76 */       p.setVelocity(p.getEyeLocation().getDirection().multiply(2).add(new Vector(0, 1.5, 0)));
-p.getInventory().remove(p.getItemInHand());
-				} else {     p.setVelocity(p.getEyeLocation().getDirection().multiply(2).add(new Vector(0, 1.5, 0)));
-				p.getInventory().remove(p.getItemInHand());
-				}
-			} else if (!(p.isOnGround())) {     p.setVelocity(p.getEyeLocation().getDirection().multiply(2).add(new Vector(0, 1.5, 0)));
-			p.getInventory().remove(p.getItemInHand());
-				this.jumped.put(p, Integer.valueOf(1));
-			} else {     p.setVelocity(p.getEyeLocation().getDirection().multiply(2).add(new Vector(0, 1.5, 0)));
-			for (ItemStack item : p.getInventory().getContents()) {
-		          if (item != null && item.getType() == Material.MAGMA_CREAM) {
-		              // Found the item, now remove one from its stack
-		              if (item.getAmount() > 1) {
-		                  item.setAmount(item.getAmount() - 1);
-		              } else {
-		                  // If only one item in the stack, set the slot to null
-		            	  p.getInventory().removeItem(item); // Or set the specific slot to null if you know the index
-		              }
-		              p.updateInventory(); // Update the player's client-side inventory
-		              break; // Stop after removing one
-		          }
-		      
-		}
-			}}}
+    if (item == null || item.getType() != Material.MAGMA_CREAM) return;
+    if (!item.hasItemMeta()) return;
+    if (!item.getItemMeta().hasDisplayName()) return;
+
+    if (!ChatColor.stripColor(item.getItemMeta().getDisplayName())
+            .equalsIgnoreCase("Estilingue")) return;
+
+    event.setCancelled(true);
+
+    if (Bukkit.getPluginManager().getPlugin("BedWars1058") == null) return;
+
+    if (this.jumped.containsKey(p)) return;
+
+    // Marca o player como usado
+    this.jumped.put(p, 1);
+
+    // Aplica o impulso
+    launchPlayer(p);
+
+    // Remove 1 item
+    removeOneItem(p, item);
 }
-
+private void launchPlayer(Player p) {
+    p.setVelocity(
+        p.getEyeLocation()
+         .getDirection()
+         .multiply(2)
+         .add(new Vector(0, 1.5, 0))
+    );
+}
+private void removeOneItem(Player p, ItemStack item) {
+    if (item.getAmount() > 1) {
+        item.setAmount(item.getAmount() - 1);
+    } else {
+        p.getInventory().remove(item);
+    }
+}
 @EventHandler
 public void landed(PlayerMoveEvent e) {
-	if ((e.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)
-			&& (this.jumped.containsKey(e.getPlayer()))) {
-		this.jumped.remove(e.getPlayer());
+	if (e.getPlayer().isOnGround() && jumped.containsKey(e.getPlayer())) {
+	    jumped.remove(e.getPlayer());
 	}
 }
 @EventHandler
@@ -82,7 +83,10 @@ public void onDamag123e(BlockBurnEvent event) {
 	if (Bukkit.getPluginManager().getPlugin("BedWars1058") == null) {
     		return;
     	}
-	
+	if (event.getBlock().getWorld() == Bukkit.getWorld("spawnbw")) {
+		return;
+	}
+	event.setCancelled(true);
 }
 @EventHandler
 public void onDamag123e(EntityDamageEvent event) {

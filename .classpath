@@ -27,5 +27,7 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SPRINTMC BACKUP/PVP-KP/plugins/WorldGuard.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Desktop/SKYZERMC BACKUP GERAL/LOBBY/plugins/AulerSkywars.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/BungeeCord.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/apollo-bukkit-1.2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Home/Downloads/apollo-velocity-1.2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

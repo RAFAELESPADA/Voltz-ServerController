@@ -2,11 +2,14 @@ package me.rafaelauler.ss;
 
 
 
-	import java.util.Random;
+	import java.awt.Color;
+import java.util.Optional;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,15 +24,27 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import com.lunarclient.apollo.Apollo;
+import com.lunarclient.apollo.common.location.ApolloBlockLocation;
+import com.lunarclient.apollo.module.beam.Beam;
+import com.lunarclient.apollo.module.notification.NotificationModule;
+import com.lunarclient.apollo.module.staffmod.StaffModModule;
+import com.lunarclient.apollo.player.ApolloPlayer;
 
 import br.com.ystoreplugins.product.yarmazem.ArmazemAPIHolder;
 import br.com.ystoreplugins.product.yspawnersv2.SpawnerV2APIHolder;
@@ -47,6 +62,9 @@ import net.milkbowl.vault.permission.Permission;
 	    private final BukkitMain plugin;
 	    private final LuckPerms luckPerms;
 	    public static Economy econ = null;
+	    NotificationModule notificationmodule = Apollo.getModuleManager().getModule(NotificationModule.class);
+	    StaffModModule staffmodule = Apollo.getModuleManager().getModule(StaffModModule.class);
+
 	    public static Permission perms = null;
 	    public Eventos(BukkitMain plugin, LuckPerms luckPerms) {
 	        this.plugin = plugin;
@@ -57,7 +75,128 @@ import net.milkbowl.vault.permission.Permission;
 	        EventBus eventBus = this.luckPerms.getEventBus();
 	        eventBus.subscribe(this.plugin, NodeAddEvent.class, this::onNodeAdd);
 	    }
-	    
+	    public void ativarModoStaff(Player player) {
+	    	ApolloPlayer p = Apollo.getPlayerManager().getPlayer(player.getUniqueId()).get();
+	    	if (p == null) {
+	    		return;
+	    	}
+	    	staffmodule.enableAllStaffMods(p);
+	            player.sendMessage("§aModo Staff do Lunar Client ativado automaticamente!");
+	       
+	    }
+	    @EventHandler
+	    public void aoMudarDeGamemode(PlayerGameModeChangeEvent event) {
+	        Player player = event.getPlayer();
+	        if (!player.hasPermission("kombo.cmd.report")) {
+	        	return;
+	        }
+	        // Se ele entrar no Criativo, ativa as ferramentas do Lunar Staff Mod
+	        if (event.getNewGameMode() == GameMode.CREATIVE) {
+	        	ativarModoStaff(player);
+	        }
+	    }
+	    @EventHandler
+	    public void aoClicarNoJogador(PlayerInteractEntityEvent event) {
+	        if (!(event.getRightClicked() instanceof Player)) return;
+	        
+	        Player staff = event.getPlayer();
+	        Player alvo = (Player) event.getRightClicked();
+if (!staff.hasPermission("kombo.cmd.report")) {
+	return;
+}
+if (alvo.hasPermission("kombo.cmd.report")) {
+	return;
+}
+if (staff.getGameMode() != GameMode.CREATIVE) {
+    return;
+}
+boolean isCitizensNPC = alvo.hasMetadata("NPC");
+if (isCitizensNPC) {
+	return;
+}
+ItemStack item = staff.getItemInHand();
+
+if (item != null && item.getType() != Material.AIR) {
+    return;
+}
+
+	            abrirMenuPunicao(staff, alvo);
+	       
+	    }
+	    public void abrirMenuPunicao(Player staff, Player alvo) {
+	        Inventory gui = Bukkit.createInventory(null, 9, "Punição: " + alvo.getName());
+
+	        // Botão de BAN (Lã Vermelha)
+	        ItemStack ban = new ItemStack(Material.REDSTONE);
+	        ItemMeta banMeta = ban.getItemMeta();
+	        banMeta.setDisplayName("§c§lBANIR " + alvo.getName() + " POR USO DE TRAPAÇAS");
+	        ban.setItemMeta(banMeta);
+
+	        // Botão de MUTE (Lã Amarela)
+	        ItemStack mute = new ItemStack(Material.REDSTONE_ORE);
+	        ItemMeta muteMeta = mute.getItemMeta();
+	        muteMeta.setDisplayName("§e§lMUTAR " + alvo.getName() + " POR SPAM");
+	        mute.setItemMeta(muteMeta);
+	        
+	        ItemStack mute2 = new ItemStack(Material.BOOK);
+	        ItemMeta muteMeta2 = mute2.getItemMeta();
+	        muteMeta2.setDisplayName("§e§lBANIR " + alvo.getName() + " POR DIVULGAÇÃO DE SERVIDORES");
+	        mute2.setItemMeta(muteMeta2);
+	        // Botão de MUTE (Lã Amarela)
+	        ItemStack mute3 = new ItemStack(Material.STICK);
+	        ItemMeta mute3Meta = mute3.getItemMeta();
+	        mute3Meta.setDisplayName("§e§lMUTAR " + alvo.getName() + " POR OFENSA");
+	        mute3.setItemMeta(mute3Meta);
+	        // Botão de KICK (Lã Branca)
+	        ItemStack kick = new ItemStack(Material.WOOL);
+	        ItemMeta kickMeta = kick.getItemMeta();
+	        kickMeta.setDisplayName("§f§lKICKAR " + alvo.getName());
+	        kick.setItemMeta(kickMeta);
+
+	        gui.setItem(0, ban);
+	        gui.setItem(4, mute);
+	        gui.setItem(6, mute2);
+	        gui.setItem(8, mute3);
+	        gui.setItem(2, kick);
+
+
+	        staff.openInventory(gui);
+	    }
+	    @EventHandler
+	    public void aoClicarNoMenu(InventoryClickEvent event) {
+	        if (!event.getView().getTitle().startsWith("Punição: ")) return;
+	        
+	        event.setCancelled(true); // Impede o staff de pegar o item
+	        Player staff = (Player) event.getWhoClicked();
+	        String alvoNome = event.getView().getTitle().replace("Punição: ", "");
+	        
+	        if (event.getCurrentItem() == null) return;
+
+	        switch (event.getCurrentItem().getType()) {
+	            case REDSTONE:
+	                staff.performCommand("ban " + alvoNome + " all null Uso de Trapaças");
+	                staff.closeInventory();
+	                break;
+	            case REDSTONE_ORE:
+	                staff.performCommand("tempmute " + alvoNome + " 3d all null Spam/Chat");
+	                staff.closeInventory();
+	                break;
+	            case STICK:
+	                staff.performCommand("tempmute " + alvoNome + " 7d all null Ofensa");
+	                staff.closeInventory();
+	                break;
+	            case BOOK:
+	                staff.performCommand("ban " + alvoNome + " all null Divulgação de Servidores");
+	                staff.closeInventory();
+	                break;
+	            case WOOL:
+	                staff.performCommand("kick " + alvoNome + " Comportamento inadequado");
+	                staff.closeInventory();
+	                break;
+			default:
+				break;
+	        }
+	    }
 	    public void Atirar2(Player p) {
 	    	final Location loc = p.getEyeLocation();
 
@@ -102,6 +241,14 @@ import net.milkbowl.vault.permission.Permission;
 	    
 	Atirar2(e.getPlayer());
 	}
+	    public void displayBeam(Player viewer, Color c, String id, ApolloBlockLocation l) {
+	        Optional<ApolloPlayer> apolloPlayerOpt = Apollo.getPlayerManager().getPlayer(viewer.getUniqueId());
+	     
+	        apolloPlayerOpt.ifPresent(apolloPlayer -> {
+	         Beam.builder().id(id).location(l).color(c).build(); 
+	          
+	        });
+	    }
 	    @EventHandler
 		public void onJoin(PlayerLoginEvent e) {
 			Player player = e.getPlayer();

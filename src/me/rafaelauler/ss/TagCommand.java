@@ -31,6 +31,7 @@ public class TagCommand implements CommandExecutor {
 	Map<String, Long> cooldowns = new HashMap<String, Long>();
 
 	  public static HashMap<Player , String> tagatual = new HashMap();
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
